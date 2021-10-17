@@ -1,7 +1,7 @@
 //随机背景图片数组,图片可以换成图床链接，注意最后一条后面不要有逗号
 var backimg =[
-    "url()",
-    "url()",
+    "url(https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/beijing - 副本 (2).jpg)",
+    "url(https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/beijing - 副本.jpg)",
     "url(https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/beijing.jpg)"
 ];
 //获取背景图片总数，生成随机数
