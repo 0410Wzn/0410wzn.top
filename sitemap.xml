@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://0410wzn.top/2022/01/10/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9A%8F%E7%AC%94/</loc>
+    
+    <lastmod>2022-01-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://0410wzn.top/2022/01/06/BuuCTF-Pwn-WP/</loc>
+    
+    <lastmod>2022-01-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://0410wzn.top/2021/12/08/BUUCTF-MISC-WP-%E6%9B%B4%E6%96%B0ing/</loc>
     
     <lastmod>2021-12-14</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://0410wzn.top/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
     
     <lastmod>2021-12-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://0410wzn.top/2021/11/27/PWN%E5%AD%A6%E4%B9%A0%E9%9A%8F%E7%AC%94/</loc>
-    
-    <lastmod>2021-12-08</lastmod>
     
   </url>
   
@@ -67,50 +74,57 @@
 
   <url>
     <loc>https://0410wzn.top/</loc>
-    <lastmod>2022-01-03</lastmod>
+    <lastmod>2022-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://0410wzn.top/tags/%E8%90%8C%E6%96%B0/</loc>
-    <lastmod>2022-01-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://0410wzn.top/tags/Linux%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2022-01-03</lastmod>
+    <lastmod>2022-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://0410wzn.top/tags/%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2022-01-03</lastmod>
+    <loc>https://0410wzn.top/tags/Pwn%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2022-01-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://0410wzn.top/tags/%E8%90%8C%E6%96%B0/</loc>
+    <lastmod>2022-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://0410wzn.top/tags/MISC/</loc>
-    <lastmod>2022-01-03</lastmod>
+    <lastmod>2022-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://0410wzn.top/tags/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%EF%BC%8C%E6%88%91%E5%AD%A6pwn/</loc>
-    <lastmod>2022-01-03</lastmod>
+    <loc>https://0410wzn.top/tags/%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2022-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://0410wzn.top/tags/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%EF%BC%8C%E6%88%91%E5%AD%A6Pwn/</loc>
-    <lastmod>2022-01-03</lastmod>
+    <lastmod>2022-01-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://0410wzn.top/tags/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%EF%BC%8C%E6%88%91%E5%AD%A6pwn/</loc>
+    <lastmod>2022-01-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
