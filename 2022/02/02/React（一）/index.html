@@ -1,0 +1,966 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh_Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>React（一） | 【W】</title><meta name="keywords" content="React"><meta name="author" content="[&quot;W&quot;]"><meta name="copyright" content="[&quot;W&quot;]"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="React（一）第一章    React基础React简介What  用于构建用户界面的JS库 （操作DOM呈现页面，也即只关注界面）  将数据渲染为HTML视图的开源JS库  Why原生的缺点：  原生JS操作DOM频繁，效率低 （DOM — API操作UI）（尽管jQuery通过包装减少了代码量的书写，但在效率上没有任何提升）  使用JS直接操作DOM，浏览器会进行大量重绘重排  原生JS没有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React（一）">
+<meta property="og:url" content="https://0410wzn.top/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="【W】">
+<meta property="og:description" content="React（一）第一章    React基础React简介What  用于构建用户界面的JS库 （操作DOM呈现页面，也即只关注界面）  将数据渲染为HTML视图的开源JS库  Why原生的缺点：  原生JS操作DOM频繁，效率低 （DOM — API操作UI）（尽管jQuery通过包装减少了代码量的书写，但在效率上没有任何提升）  使用JS直接操作DOM，浏览器会进行大量重绘重排  原生JS没有">
+<meta property="og:locale">
+<meta property="og:image" content="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp">
+<meta property="article:published_time" content="2022-02-02T13:54:07.000Z">
+<meta property="article:modified_time" content="2022-02-08T01:51:45.673Z">
+<meta property="article:author" content="W">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://0410wzn.top/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'React（一）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-08 09:51:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="【W】" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/ev草・郎汎用02c1.bmp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">【W】</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">React（一）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-02-02T13:54:07.000Z" title="Created 2022-02-02 21:54:07">2022-02-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-02-08T01:51:45.673Z" title="Updated 2022-02-08 09:51:45">2022-02-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="React（一）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="React（一）"><a href="#React（一）" class="headerlink" title="React（一）"></a>React（一）</h1><h2 id="第一章-React基础"><a href="#第一章-React基础" class="headerlink" title="第一章    React基础"></a>第一章    React基础</h2><h3 id="React简介"><a href="#React简介" class="headerlink" title="React简介"></a>React简介</h3><h4 id="What"><a href="#What" class="headerlink" title="What"></a>What</h4><ul>
+<li> 用于构建用户界面的JS库 （操作DOM呈现页面，也即只关注界面）</li>
+<li> 将数据渲染为HTML视图的开源JS库</li>
+</ul>
+<h4 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h4><p>原生的缺点：</p>
+<ul>
+<li><p>原生JS操作DOM频繁，效率低 （DOM — API操作UI）（尽管jQuery通过包装减少了代码量的书写，但在效率上没有任何提升）</p>
+</li>
+<li><p>使用JS直接操作DOM，浏览器会进行大量重绘重排</p>
+</li>
+<li><p>原生JS没有组件化编码方案，代码复用率低</p>
+<blockquote>
+<p>模块化 —— 将JS的根据作用分成对应功能的模块</p>
+</blockquote>
+</li>
+</ul>
+<p>React的特点：</p>
+<ul>
+<li> 采用组件化模式、声明式编码，提高开发效率及组件复用率</li>
+</ul>
+<blockquote>
+<p>命名式 与 声明式</p>
+</blockquote>
+<ul>
+<li>在<code>ReactNative</code>中可以使用React语法进行移动端开发</li>
+<li>  使用虚拟DOM + 优秀的Diffing算法，尽量减少与真实DOM的交互</li>
+</ul>
+<p>如下图所示，原生JS缺少代码复用，当你想改变页面中的某些元素时，结果往往是使用新的DOM将以前的完整覆盖掉，而以前的数据并没有派上用场</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/IMG_0087.PNG" alt="IMG_0087"></p>
+<p>原生JS实现</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/F3A6B2F5422143F03CC64B9BF37CAE96.png" alt="F3A6B2F5422143F03CC64B9BF37CAE96"></p>
+<p>React实现</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/D015342A860D3CC92E1DFB6ADFD31F49.png" alt="D015342A860D3CC92E1DFB6ADFD31F49"></p>
+<h4 id="How"><a href="#How" class="headerlink" title="How"></a>How</h4><p>前置知识：判断this的指向、class、ES6语法规范、npm包管理器、原型&amp;&amp;原型链、数组常用方法、模块化</p>
+<hr>
+<h3 id="Hello-React"><a href="#Hello-React" class="headerlink" title="Hello React"></a>Hello React</h3><p>我们以实例作为引入React知识点的例子，这里我们用到三个react的js，分别是<code>babel.min</code>、<code>react.development</code>和<code>react-dom.development</code>，</p>
+<p><code>babel</code> 在ES6中起到的作用是转码，即将ES6转换为ES5，而在react中起到的作用是将jsx转换为js（浏览器无法直接识别jsx文件） </p>
+<p><code>react.development</code>是react核心库，</p>
+<p><code>react-dom.development</code>是react扩展库，用来操作dom</p>
+<p>我们写下以下代码</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201102626707.png" alt="image-20220201102626707"></p>
+<p>进入chorme调试</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201102652446.png" alt="image-20220201102652446"></p>
+<p>这里的警告，说明咱们的目前的入门写法存在一些问题，即当我们使用浏览器加载此文档时，浏览器发现了babel，就会立刻进行翻译，而如果jsx的代码繁多且复杂时，耗费的时间会非常长，这种状况不适合于大型开发中，至于开发中如何去做，会在下文中予以解决</p>
+<hr>
+<h3 id="虚拟DOM的两种创建方法"><a href="#虚拟DOM的两种创建方法" class="headerlink" title="虚拟DOM的两种创建方法"></a>虚拟DOM的两种创建方法</h3><ul>
+<li><p>使用<strong>jsx</strong>创建虚拟DOM（同上）</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201103919154.png" alt="image-20220201103919154"></p>
+</li>
+<li><p>使用<strong>js</strong>创建虚拟DOM</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201104434857.png" alt="image-20220201104434857"></p>
+</li>
+</ul>
+<p>我们一般更喜欢使用<strong>jsx</strong>，因为当我们需要创建一个多层嵌套的标签时，如果使用<strong>js</strong>，我们需要在<code>createElement</code>中多次调用它自己，使代码变得冗长<del>且没味</del>，而使用<strong>jsx</strong>只需如下图所示</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201104923955.png" alt="image-20220201104923955"></p>
+<p>或者是</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201105116868.png" alt="image-20220201105116868"></p>
+<hr>
+<h3 id="虚拟DOM与真实DOM"><a href="#虚拟DOM与真实DOM" class="headerlink" title="虚拟DOM与真实DOM"></a>虚拟DOM与真实DOM</h3><p>关于虚拟DOM：</p>
+<ul>
+<li> 本质是Object类型的对象（一般对象）</li>
+<li> 虚拟DOM比较”轻“，真实DOM比较”重“，因为虚拟DOM使React内部在用，无需真实DOM上那么多属性</li>
+<li> 虚拟DOM最终会被React转化为真实DOM，呈现在页面上</li>
+</ul>
+<hr>
+<h3 id="jsx语法规则"><a href="#jsx语法规则" class="headerlink" title="jsx语法规则"></a>jsx语法规则</h3><ul>
+<li><p> 全称: JavaScript XML</p>
+<blockquote>
+<p>XML早期用于存储和传输数据，后来存储和传输数据使用JSON</p>
+</blockquote>
+</li>
+<li><p>react定义的一种类似于XML的JS扩展语法: JS + XML本质是**React.createElement(component, props, …children)**方法的语法糖</p>
+</li>
+<li><p> 作用: 用来简化创建虚拟DOM </p>
+</li>
+</ul>
+<p>​            写法：<strong>var</strong> <strong>ele</strong> <strong>=</strong> Hello JSX!</p>
+<p>​                 注意1：它不是字符串, 也不是HTML/XML标签</p>
+<p>​                 注意2：它最终产生的就是一个JS对象</p>
+<ul>
+<li><p>标签名任意: HTML标签或其它标签</p>
+</li>
+<li><p> 标签属性任意: HTML标签属性或其它</p>
+</li>
+<li><p> 基本语法规则</p>
+</li>
+</ul>
+<p>​            遇到 &lt;开头的代码, 以标签的语法解析: html同名标签转换为html同名元素, 其它标签需要特别解析</p>
+<p>​            遇到以 { 开头的代码，以JS语法解析: 标签中的js表达式必须用{ }包含</p>
+<ul>
+<li> babel.js的作用</li>
+</ul>
+<p>​            浏览器不能直接解析JSX代码, 需要babel转译为纯JS的代码才能运行</p>
+<p>​            只要用了JSX，都要加上type=”text/babel”, 声明需要babel来处理</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201112334780.png" alt="image-20220201112334780"></p>
+<hr>
+<h3 id="何为JS表达式"><a href="#何为JS表达式" class="headerlink" title="何为JS表达式"></a>何为JS表达式</h3><p>要注意区分：【js语句(代码)】与【js表达式】</p>
+<ol>
+<li><p>表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方</p>
+<blockquote>
+<p>以下都是表达式：（都有返回值）</p>
+<p>(1) a</p>
+<p>(2) a + b</p>
+<p>(3) demo(1)</p>
+<p>(4) arr.map()    //map方法用于加工数组    </p>
+<p>(5) function  test() {}</p>
+</blockquote>
+</li>
+<li><p>语句（代码）：</p>
+<blockquote>
+<p>下面这些都是语句（代码）：（控制代码走向。没有值）</p>
+<p>(1) if () {}</p>
+<p>(2) for () {}</p>
+<p>(3) switch () {case: xxxx}</p>
+</blockquote>
+</li>
+</ol>
+<p> 以下是一个遍历的代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">const</span> data = [<span class="string">&#x27;Angular&#x27;</span>, <span class="string">&#x27;React&#x27;</span>, <span class="string">&#x27;Vue&#x27;</span>]</span><br><span class="line"><span class="comment">//下面有一些可能出错的地方——index，我们在接下来也会j	</span></span><br><span class="line"><span class="keyword">const</span> VDOM = &#123;				</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>遍历！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">    	<span class="tag">&lt;<span class="name">ul</span>&gt;</span>					</span></span><br><span class="line"><span class="xml">    		&#123;</span></span><br><span class="line"><span class="xml">    		data.map((item, index) ==&gt; &#123;</span></span><br><span class="line"><span class="xml">                return <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span> = <span class="string">&#123;index&#125;</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span>	</span></span><br><span class="line"><span class="xml">            &#125;)</span></span><br><span class="line"><span class="xml">			&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>遍历中，列表中的每一个元素都要有一个唯一值key</p>
+<hr>
+<h3 id="组件与模块＆＆模块化与组件化"><a href="#组件与模块＆＆模块化与组件化" class="headerlink" title="组件与模块＆＆模块化与组件化"></a>组件与模块＆＆模块化与组件化</h3><ul>
+<li><p>模块  </p>
+<blockquote>
+<p> 理解：向外提供特定功能的js程序，一般就是一个js</p>
+<p> 为什么要拆成模块：随者业务逻辑增加，代码越来越 多且复杂</p>
+<p>作用：复用js，简化js的编写，提高js运行效率  </p>
+</blockquote>
+</li>
+<li><p>组件  </p>
+<blockquote>
+<p> 理解：用来实现局部功能效果的代码和资源的集合(html/css/js/image )等等 </p>
+<p> 为什么：一个界面的功能更复杂 </p>
+<p> 作用：复用编码，简化项目编码，提高运行效率  </p>
+</blockquote>
+</li>
+<li><p>模块化  </p>
+<blockquote>
+<p> 当应用的 js 都以模块来编写的,这个应用就是一个模块化的应用  </p>
+</blockquote>
+</li>
+<li><p>组件化  </p>
+<blockquote>
+<p> 当应用是以名组件的方式实现，这个应用就是一个组件化的应用 </p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="第二章-React面向组件编程"><a href="#第二章-React面向组件编程" class="headerlink" title="第二章    React面向组件编程"></a>第二章    React面向组件编程</h2><h3 id="函数式组件"><a href="#函数式组件" class="headerlink" title="函数式组件"></a>函数式组件</h3><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201145146419.png" alt="image-20220201145146419"></p>
+<p>此时，组件内部的this是undefined，其原因是，当babael翻译完代码之后，会开启严格模式，禁止自定义函数里的this指向window</p>
+<blockquote>
+<p>执行了React.render(<MyComponent>……)之后，发生了什么？</MyComponent></p>
+<p>​    1.React解析组件标签，找到了MyComponent组件</p>
+<p>​    2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转换为真实</p>
+<p>​        DOM，随后呈现在页面中</p>
+</blockquote>
+<hr>
+<h3 id="类的复习"><a href="#类的复习" class="headerlink" title="类的复习"></a>类的复习</h3><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201165412378.png" alt="image-20220201165412378"></p>
+<hr>
+<p><code>p1.speak.call(&#123;a:1, b:2&#125;)</code>，call有一个重要的功能，即是更改函数里的this指向，而这时由于没有a、b，this的值就是undefined</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220201171906269.png" alt="image-20220201171906269"></p>
+<p>super必须第一个用欧~</p>
+<p><strong>总结</strong></p>
+<ul>
+<li>类中的构造器不是必须要写的，要对示例进行一些初始化操作，如添加指定属性时才写</li>
+<li>如果A类继承了B类，且A类中写了构造器，那么A类构造器中的super是必须要调用的</li>
+<li>类中所定义的方法，都是放在了类的原型对象上</li>
+</ul>
+<hr>
+<h3 id="类式组件"><a href="#类式组件" class="headerlink" title="类式组件"></a>类式组件</h3><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220202093028922.png" alt="image-20220202093028922"></p>
+<blockquote>
+<p>执行了React.render(<MyComponent>……)之后，发生了什么？</MyComponent></p>
+<p>​    1.React解析组件标签，找到了MyComponent组件</p>
+<p>​    2.发现组件是使用类定义的，随后new出来该类实例，并通过该实例调用到原型的render方法    </p>
+<p>​    3.将render返回的虚拟DOM转为真实DOM，随后呈现到页面中</p>
+</blockquote>
+<hr>
+<h3 id="简单组件-amp-amp-复杂组件"><a href="#简单组件-amp-amp-复杂组件" class="headerlink" title="简单组件 &amp;&amp; 复杂组件"></a>简单组件 &amp;&amp; 复杂组件</h3><p>如果组件是有状态(state)的，就是复杂组件，反之则为简单组件</p>
+<p>那么，什么是state？</p>
+<hr>
+<h3 id="组件实例的三大属性之一-—-state"><a href="#组件实例的三大属性之一-—-state" class="headerlink" title="组件实例的三大属性之一 — state"></a>组件实例的三大属性之一 — state</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>人</td>
+<td>状态</td>
+<td>影响</td>
+<td>行为</td>
+</tr>
+<tr>
+<td>组件</td>
+<td>状态</td>
+<td>驱动</td>
+<td>页面</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="React中的事件绑定"><a href="#React中的事件绑定" class="headerlink" title="React中的事件绑定"></a>React中的事件绑定</h4><p>我们先来看一下原生的绑定方式</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220202104346136.png" alt="image-20220202104346136"></p>
+<p><strong>React中，三种方法都可以，推荐第三种</strong></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220202105448711.png" alt="image-20220202105448711"></p>
+<hr>
+<h4 id="类中方法this的指向"><a href="#类中方法this的指向" class="headerlink" title="类中方法this的指向"></a>类中方法this的指向</h4><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220202112639924.png" alt="image-20220202112639924"></p>
+<p>要想解决此问题，可以添加如下图25行的语句</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220202113217130.png" alt="image-20220202113217130"></p>
+<p><code>this.changWeather.bind(this)</code>，<code>this.changWeather</code>找到了原型中的changeWeather函数，而<code>bind</code>有两个作用，一个是生成新的函数，另一个是修改this的指向，而传入的this（构造器中的this），就是Weather的实例对象</p>
+<hr>
+<h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><p>我们使用内置API来更改状态（state）</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220202120129739.png" alt="image-20220202120129739"></p>
+<p><strong>简写</strong></p>
+<p>我们自己写的函数，大部分都是作为回调函数起到交互作用，他们的this都不是指向实例函数的，当我们想引用大量回调函数时，免不了大量使用bind进行this的转移</p>
+<p><strong>而类中可以直接写赋值语句，其意为，向对应的实例对象中添加一个名x值x的属性（第22行）</strong></p>
+<p><strong>箭头函数本身没有this，但在其中使用this并不会报错，而是会找其外层函数的this来使用（第29行）</strong></p>
+<p>这样，我们便无需使用构造器了</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203083816972.png" alt="image-20220203083816972"></p>
+<hr>
+<h4 id="state总结"><a href="#state总结" class="headerlink" title="state总结"></a>state总结</h4><p>1.理解：</p>
+<ul>
+<li><p>state是组件对象最重要的属性, 值是对象(可以包含多个key-value的组合)</p>
+</li>
+<li><p>组件被称为”状态机”, 通过更新组件的state来更新对应的页面显示(重新渲染组件)</p>
+</li>
+</ul>
+<p>2.注意：</p>
+<ul>
+<li><p>组件中render方法中的this为组件实例对象</p>
+</li>
+<li><p>组件自定义的方法中this为undefined，如何解决？</p>
+</li>
+</ul>
+<p>​            （1） 强制绑定this: 通过函数对象的bind()</p>
+<p>​            （2）箭头函数</p>
+<ul>
+<li>状态数据，不能直接修改或更新</li>
+</ul>
+<hr>
+<h3 id="组件实例的三大属性之一-—-props"><a href="#组件实例的三大属性之一-—-props" class="headerlink" title="组件实例的三大属性之一 — props"></a>组件实例的三大属性之一 — props</h3><p>当我们想从外部获取信息，而不是从内部状态中读出来的，这时我们就不能使用state了，就比如以下状态</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203085453732.png" alt="image-20220203085453732"></p>
+<p>当我们想显示上述状态时</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203085527908.png" alt="image-20220203085527908"></p>
+<p>我们需要多次渲染，这么写未免有些麻烦，React给我们提供了props属性，使用方法如下</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203090341458.png" alt="image-20220203090341458"></p>
+<p>也可以先解构赋值，减少代码的书写量</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203090628148.png" alt="image-20220203090628148"></p>
+<hr>
+<h4 id="批量传递props"><a href="#批量传递props" class="headerlink" title="批量传递props"></a>批量传递props</h4><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203093739383.png" alt="image-20220203093739383"></p>
+<p>为什么能用{…p}的形式展开一个对象？在下一个模块我们来分析这个问题</p>
+<hr>
+<h4 id="…-—-展开运算符"><a href="#…-—-展开运算符" class="headerlink" title="… — 展开运算符"></a>… — 展开运算符</h4><p>展开运算符可以展开数组，但是不能展开一个对象</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203093220382.png" alt="image-20220203093220382"></p>
+<p>可以看到，{…p}本来是起到复制作用的，但是React和bable使其具有了展开对象的作用，需要注意的是，这种作用仅仅限于标签的传递</p>
+<hr>
+<h4 id="对props进行限制"><a href="#对props进行限制" class="headerlink" title="对props进行限制"></a>对props进行限制</h4><p>在下图中，我们可以看见两种对对象传入age的格式（第一种必须加引号，否则会构成语法错误）</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203093804517.png" alt="image-20220203093804517"></p>
+<p>当我们相对所有页面元素加一时</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203093947740.png" alt="image-20220203093947740"></p>
+<p>如果这样操作，只有第二种方式成功加一，而第一种方式的数字则只进行了字符串拼接，而如果第一种想传入数字，而非字符串，应该使用</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(&lt;Person name = &quot;秦&quot; age = &#123;18&#125; sex = &quot;男&quot; /&gt;, document.getElementById(&#x27;test1&#x27;))</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在此时，我们可以通过propTypes，向创建者 — Person，添加一些“要求”，或者说，“规则”</p>
+<p>需要注意的是，要注意分清<code>propTypes</code>和<code>PropTypes</code>，前者可以认为是React里的一个规矩，后者是一个内置的属性</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203100210377.png" alt="image-20220203100210377"></p>
+<p>需要注意的是，在15版本之后，这个属性单独作为一个库存在，使用需引入，并且不用写React</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203100931318.png" alt="image-20220203100931318"></p>
+<p>如果要求必须加某一项，就在后面写required</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name: PropTypes.string.isRequired</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>同时，如果指定要求为函数时，为避免与<code>function</code>关键词冲突，应使用<code>func</code></p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">speak: PropTypes.func</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>指定默认值如下dexxx</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203101251452.png" alt="image-20220203101251452"></p>
+<hr>
+<h4 id="props的简写方式"><a href="#props的简写方式" class="headerlink" title="props的简写方式"></a>props的简写方式</h4><p>props是只读的，因此我们想直接通过如<code>this.props.name = &#39;jack&#39;</code>，这样进行更改，是错误的！！！</p>
+<p>我们可以把限制塞进类里</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203103042946.png" alt="image-20220203103042946"></p>
+<hr>
+<h4 id="类式组件中的构造器与props"><a href="#类式组件中的构造器与props" class="headerlink" title="类式组件中的构造器与props"></a>类式组件中的构造器与props</h4><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220203103925102.png" alt="image-20220203103925102"></p>
+<p>通过上述学习我们知道，constructor完全可以用 = 和 箭头函数 替代，而当我们使用constructor时，如果不传入props，其中的this.props就没有接到对象，我们也就不能通过 实例.props 修改值了，即<strong>构造器是否接收props，是否传递给super，取决于：是否希望在构造器中通过this访问props</strong></p>
+<hr>
+<h4 id="函数式组件与使用props"><a href="#函数式组件与使用props" class="headerlink" title="函数式组件与使用props"></a>函数式组件与使用props</h4><p>对于函数function，由于没有实例，所以理论上三个实例属性(state/props/rerfs)都不能使用，但是，props可以使用，其原因在于，函数可以接收参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">props</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">const</span> &#123;name, age, sex&#125; = props</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		&lt;ul&gt;</span><br><span class="line">			<span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>姓名：&#123;name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">        	<span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>性别：&#123;sex&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">        	<span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>年龄：&#123;age&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="props总结"><a href="#props总结" class="headerlink" title="props总结"></a>props总结</h4><p>理解</p>
+<ul>
+<li>每个组件对象都会有props(properties的简写)属性</li>
+<li>组件标签的所有属性都保存在props中</li>
+</ul>
+<p>作用</p>
+<ul>
+<li><p>通过标签属性从组件外向组件内传递变化的数据</p>
+</li>
+<li><p>注意: 组件内部不要修改props数据-</p>
+</li>
+</ul>
+<hr>
+<h3 id="组件实例的三大属性之一-—-ref"><a href="#组件实例的三大属性之一-—-ref" class="headerlink" title="组件实例的三大属性之一 — ref"></a>组件实例的三大属性之一 — ref</h3><h4 id="字符串型的ref"><a href="#字符串型的ref" class="headerlink" title="字符串型的ref"></a>字符串型的ref</h4><p>当我们引用标签之前，在原生JS中，往往会给对应的标签打上id，如下图所示</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204101228434.png" alt="image-20220204101228434"></p>
+<p>而在React中，我们也可以向ref中写入</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204102116411.png" alt="image-20220204102116411"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204102148815.png" alt="image-20220204102148815"></p>
+<p>可以发现，refs中被写入了类似于id的“特征”，分别代表了其对应的标签，而此时，我们也可以通过refs使用标签，同时我们也可以使用解构赋值来减少代码书写量</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204102926911.png" alt="image-20220204102926911"></p>
+<p>ref收集的不是虚拟DOM，而是其在转成真实DOM之后对应的标签</p>
+<hr>
+<h4 id="回调形式的ref"><a href="#回调形式的ref" class="headerlink" title="回调形式的ref"></a>回调形式的ref</h4><p>上面我们通过由id到ref的方式简单介绍了ref，但很遗憾的是，因为存在的效率问题，直接使用字符串形式的ref目前已经不被官方推荐使用了，甚至在将来可能被废弃掉（官方文档明确说明了“未来版本可能移除”），因此，我们还要学习两种ref的使用方式</p>
+<p>我们将ref改写为回调函数形式，<code>ref=()=&gt;&#123;console.log(&#39;@&#39;)&#125;</code>，发现回调函数确实执行了，在打印台上输出了‘@’，那么，这个回调函数是否接到了参数，这个参数又是什么？</p>
+<p>打印一下</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204104004901.png" alt="image-20220204104004901"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204104230319.png" alt="image-20220204104230319"></p>
+<p>可以发现，它的参数正是ref所处的节点</p>
+<p>因此我们可以这样写</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204105320516.png" alt="image-20220204105320516"></p>
+<p>当实例调用<code>render</code>时会触发我们写的回调函数<code>ref</code>，并在调用时将当前所处的节点传了进去</p>
+<p>而<code>(currtentNode)=&gt;&#123;this.input = currtentNode&#125;</code>（currentNode - 当前节点），指的是，把节点放到组件实例自身上（<strong>这里的this，由于箭头函数本身没有this，而是会找其外层函数的this来使用，所以这里的this就是render的this，即组件的实例对象</strong>），给其起名为<code>input1</code></p>
+<p>当箭头函数左侧只有一个参数，小括号可以不要；右侧只有一句函数体，花括号可以不要，最终如下所示</p>
+<blockquote>
+<p>ref={c =&gt; this.input = c}</p>
+</blockquote>
+<p>因此在我们取用ref时，不从ref自身取，而是在其被存放的实例对象上取用，最终成品如下</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204110023666.png" alt="image-20220204110023666"></p>
+<hr>
+<h4 id="回调形式ref调用次数的问题"><a href="#回调形式ref调用次数的问题" class="headerlink" title="回调形式ref调用次数的问题"></a>回调形式ref调用次数的问题</h4><p>先参考官网文档</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204110525605.png" alt="image-20220204110525605"></p>
+<p>这里给一个内联函数的例子</p>
+<blockquote>
+<p>ref={(currentNode)=&gt;{this.input1 = currentNode; console.log(‘@’, currentNode);}}</p>
+</blockquote>
+<p>控制台输出：（注意的是，页面渲染时的那次不算跟更新）</p>
+<blockquote>
+<p>第一次调用：@ null    —    清空动作</p>
+<p>第二次调用：@ 标签</p>
+</blockquote>
+<p>jsx怎样注释？</p>
+<blockquote>
+<p> {/* …… */}</p>
+</blockquote>
+<p>那么正确的形式该怎样写呢？</p>
+<p>修改ref</p>
+<blockquote>
+<p>ref={this.saveInput}    </p>
+</blockquote>
+<p>同时</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204111856463.png" alt="image-20220204111856463"></p>
+<hr>
+<h4 id="createRef的使用"><a href="#createRef的使用" class="headerlink" title="createRef的使用"></a>createRef的使用</h4><p>我们可以通过方法创建一个容器，并把标签“塞到”里面</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204112911712.png" alt="image-20220204112911712"></p>
+<p>由于每个容器是”专人专用“的，所以后放入的，会把前面的顶掉，所以针对不同的标签，要用不同的容器进行存取</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220204112703464.png" alt="image-20220204112703464"></p>
+<p>可以看到<code>input</code>存储在容器中，我们要想调用它，应该这样写</p>
+<blockquote>
+<p>alert(this.myRef.current.value)</p>
+</blockquote>
+<hr>
+<h3 id="React中的事件处理"><a href="#React中的事件处理" class="headerlink" title="React中的事件处理"></a>React中的事件处理</h3><p>（1）通过<strong>onXxx</strong>属性指定事件处理函数（注意大小写！）</p>
+<p>​            a.    React使用的是自定义（合成）事件，而非原生的DOM事件</p>
+<p>​            b.    React中的事件是通过事件委托方式处理的（委托给组件最外层的元素）</p>
+<p>（2）通过<code>event.target</code>得到发生事件的DOM元素对象 （**<font color="red">请勿过度使用ref</font>**）</p>
+<hr>
+<h3 id="受控组件与非受控组件"><a href="#受控组件与非受控组件" class="headerlink" title="受控组件与非受控组件"></a>受控组件与非受控组件</h3><p>页面中所有输入类的DOM，随着输入，就能把内容维护到状态中去。这就是受控</p>
+<p>而“现用现取”，就是非受控</p>
+<hr>
+<h3 id="EXP-高阶函数-amp-amp-函数柯里化"><a href="#EXP-高阶函数-amp-amp-函数柯里化" class="headerlink" title="EXP    高阶函数 &amp;&amp; 函数柯里化"></a>EXP    高阶函数 &amp;&amp; 函数柯里化</h3><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220205102957171.png" alt="image-20220205102957171"></p>
+<p><strong>例子：</strong></p>
+<p>当我们将表单中的数据添加到state时，一个一个写未免过于麻烦，过于重复，因此可以使用如下方式</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220205102224284.png" alt="image-20220205102224284"></p>
+<p>可以发现，下面的onChange调用的是saveFormData返回的对象，而为了使它正常工作，我们选择将调用函数的返回值也设置为一个函数，这样onChange最终还是调用到了函数</p>
+<p>在这里还有个细节需要注意</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220205102512952.png" alt="image-20220205102512952"></p>
+<p>这里的”dataType”，如果不加中括号，仅仅会在state中新建一个dataType，而不会获取其内容</p>
+<hr>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>挂载（mount）：组件放到页面</p>
+<p>卸载（unmount）：组件被移除</p>
+<h4 id="引入生命周期"><a href="#引入生命周期" class="headerlink" title="引入生命周期"></a>引入生命周期</h4><p>我们以本题为例</p>
+<p>需求：</p>
+<p>1.</p><h2>内容规律变浅，消失后出现<p></p>
+<p>2.点击<button>，组件消失</button></p>
+<hr>
+<h5 id="如何卸载一个组件？"><a href="#如何卸载一个组件？" class="headerlink" title="如何卸载一个组件？"></a>如何卸载一个组件？</h5><p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207094517458.png" alt="image-20220207094517458"></p>
+<hr>
+<h5 id="实现需求"><a href="#实现需求" class="headerlink" title="实现需求"></a>实现需求</h5><p>如果将定时器设置在render里，定时器会发生嵌套，变化速度越来越快，占用越来越多，我们先折中一下，再布置一个按钮，将需求先完成</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207101824180.png" alt="image-20220207101824180"></p>
+<p>那么React是否有办法，在内容挂载到页面后，帮助我们调用一次定时器呢？</p>
+<p>render的兄弟 — <strong>componentDidMount</strong></p>
+<p>我们知道，<code>render</code>调用的时机有两个：</p>
+<p>（1）初始化渲染</p>
+<p>（2）状态更新之后</p>
+<p>而<code>componentDidMount</code>则只在一个时候调用：组件挂载完毕</p>
+<p>因此我们可以这样写</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207102946452.png" alt="image-20220207102946452"></p>
+<p>但是，这样仍存在一些错误，当我们点击<button>，<h2>确实木大了，但是控制台提出了抗议</h2></button></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207103111251.png" alt="image-20220207103111251"></p>
+<p>组件没了，不能再更新状态了！所以我们还需要清空定时器</p>
+<p>可以这样</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207103352556.png" alt="image-20220207103352556"></p>
+<p>但还可以这样<img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/Quicker_20220207_103611.png" alt="Quicker_20220207_103611"></p>
+<p>我们从这里可以看出，React总是提前准备了一些函数，再合适的时候做着合适的事情，而这些事情，如下图所示</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207104241309.png" alt="image-20220207104241309"></p>
+<p>这些函数被叫做：</p>
+<blockquote>
+<p> 生命周期回调函数 &lt;=&gt; 生命周期钩子函数 &lt;=&gt; 生命周期函数 &lt;=&gt; 生命周期钩子</p>
+</blockquote>
+<p>而函数也不仅仅只有这两个，我们将在下面几小节讨论</p>
+<hr>
+<h4 id="生命周期（旧）"><a href="#生命周期（旧）" class="headerlink" title="生命周期（旧）"></a>生命周期（旧）</h4><p>理解：</p>
+<p>1、组件从创建到死亡会经历一些特殊的阶段</p>
+<p>2、React组件包含一系列钩子函数（生命周期回调函数），会在特定时刻调用</p>
+<p>3、我们在定义组件时，会在特定的生命周期回调函数中，做特定的工作</p>
+<p><strong>生命周期流程图（旧）</strong></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png" alt="react生命周期(旧)"></p>
+<p>这里以求和为案例</p>
+<p>挂载时：</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207111359969.png" alt="image-20220207111359969"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207111421731.png" alt="image-20220207111421731"></p>
+<hr>
+<p>更新时</p>
+<p>我们添加</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207112553312.png" alt="image-20220207112553312"></p>
+<p>可以发现，页面开始并没有打印，而当我们按下<button>更新之后</button></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207112650035.png" alt="image-20220207112650035"></p>
+<p>打印执行，这就是更新的含义</p>
+<p>而在更新时，有三条路可以走</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207112031404.png" alt="image-20220207112031404"></p>
+<p><strong><font size="5" color="red">线路2</font></strong></p>
+<p>setState已经很熟悉了，pass</p>
+<p><strong>shouldComponentUpdate</strong></p>
+<p>其中的<code>shouldComponentUpdate</code>（是否更新），类似于一个阀门，返回<strong>true</strong>，代表更新可以进行，而返回<strong>false</strong>，代表更新不被允许（默认返回<strong>true</strong>）</p>
+<p>我们添加这个钩子（返回<strong>true</strong>），再点击 + 1</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207113722669.png" alt="image-20220207113722669"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207113003173.png" alt="image-20220207113003173"></p>
+<p>正如上面所说，每次更新之前都询问了“阀门状态”</p>
+<p><strong>componentWillUpdate</strong></p>
+<p>添加钩子，点击 +1 之后的控制台</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207113732494.png" alt="image-20220207113732494"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207113447355.png" alt="image-20220207113447355"></p>
+<p><strong>componentDidUpdate</strong></p>
+<p>添加钩子，点击 +1 之后的控制台</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207113742658.png"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207113624606.png" alt="image-20220207113624606"></p>
+<p><strong><font size="5" color="red">线路3</font></strong></p>
+<p><strong>forceUpdate（强制更新）</strong></p>
+<p>不对状态做出更改（不管阀门），强制更新组件</p>
+<p>我们把阀门设为<strong>false</strong>，尝试一下</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207114605377.png" alt="image-20220207114605377"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207114552209.png" alt="image-20220207114552209"></p>
+<p>果然绕过了阀门</p>
+<p><strong><font size="5" color="red">线路1</font></strong></p>
+<p>我们要先在两个组件之间构建父子关系</p>
+<img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207115126627.png" alt="image-20220207115126627" style="zoom: 80%;">
+
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207115245571.png" alt="image-20220207115245571"></p>
+<p>我们想通过A组件，展示B组件的信息</p>
+<p><strong>componentWillReceiveProps</strong></p>
+<p>由于是B组件从外部（A）接收标签，我们添加钩子查看</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207121205899.png" alt="image-20220207121205899"></p>
+<p>点开之后，没有？？？！！！</p>
+<p>实际上，这个钩子有个“坑“，<strong>第一次传的不算</strong></p>
+<p>我们点击按钮（由于挂载页面时已经render一回了，这次便是第二次执行，B组件也接收到了<strong>新的props</strong>），</p>
+<p>点之前</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207121613655.png" alt="image-20220207121613655"></p>
+<p>点之后</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207121626480.png" alt="image-20220207121626480"></p>
+<hr>
+<h4 id="总结：旧生命周期"><a href="#总结：旧生命周期" class="headerlink" title="总结：旧生命周期"></a>总结：旧生命周期</h4><p><strong>1.</strong> <strong>初始化阶段:</strong> 由ReactDOM.render()触发—初次渲染</p>
+<p>\1.    constructor()</p>
+<p>\2.    componentWillMount()</p>
+<p>\3.    render()        ===&gt;        必须</p>
+<p>\4.    componentDidMount()        ===&gt;        常用</p>
+<p>​            用于初始化，如：开启定时器、发送网络请求、订阅消息</p>
+<p>   <strong>2.</strong> <strong>更新阶段:</strong> 由组件内部this.setSate()或父组件重新render触发</p>
+<p>\1.    shouldComponentUpdate()</p>
+<p>\2.    componentWillUpdate()</p>
+<p>\3.    render()        ===&gt;        必须</p>
+<p>\4.    componentDidUpdate()</p>
+<p>   <strong>3.</strong> <strong>卸载组件:</strong> 由ReactDOM.unmountComponentAtNode()触发</p>
+<p>\1.    componentWillUnmount()        ===&gt;        常用</p>
+<p>​            用于”收尾“，如：关闭定时器、取消订阅消息</p>
+<hr>
+<h4 id="新旧生命周期对比"><a href="#新旧生命周期对比" class="headerlink" title="新旧生命周期对比"></a>新旧生命周期对比</h4><p>我们将上面求和的例子中的引入的React换为新版本，发现代码可以正常挂载，but</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207142824820.png" alt="image-20220207142824820"></p>
+<p>这些警告说明了旧钩子在新版本中也可以用，但不被推荐使用，同时两个函数名称发生改变</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207143338050.png" alt="image-20220207143338050"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207143349943.png" alt="image-20220207143349943"></p>
+<p>更改之后，下面的两个警告disappear了</p>
+<p>简记：所有带”<strong>will</strong>“的钩子（3个），在新版本都推荐前置<strong>UNSAFE_<strong>（无关安全性，是警告可能在未来版本中出现bug），</strong>除了 componentWillUnmount</strong></p>
+<p><strong><font color="red">官方文档中提出，那3个需要加前缀的钩子，都即将过时！！！</font></strong></p>
+<p>我们在下面重新展示新旧的生命周期图，进行对比</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%96%B0).png" alt="react生命周期(新)"></p>
+<p>首先，带有<code>will</code>的几个”_UNSAFE“钩子没有再新周期图中出现</p>
+<p>其次，新周期图多了<code>getDerivedStateFromProps</code>（挂载时）、<code>getSnapshotBeforeUpdate</code>（更新时）这两个新钩子</p>
+<hr>
+<h4 id="生命周期（新）"><a href="#生命周期（新）" class="headerlink" title="生命周期（新）"></a>生命周期（新）</h4><p>这里先说一下新生命周期的几个钩子</p>
+<h5 id="getDerivedStateFromProps（从props得到派生的状态）"><a href="#getDerivedStateFromProps（从props得到派生的状态）" class="headerlink" title="getDerivedStateFromProps（从props得到派生的状态）"></a>getDerivedStateFromProps（从props得到派生的状态）</h5><p>我们将其添加进组件</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207145517490.png" alt="image-20220207145517490"></p>
+<p>意想不到的事情发生了</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207145543760.png" alt="image-20220207145543760"></p>
+<p>警告告诉我们，这个钩子挂到了实例上，请定义它，把它作为一个静态方法</p>
+<p>加上 <code>static</code>之后</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207145827057.png" alt="image-20220207145827057"></p>
+<p>返回又不对了，它要求只能返回一个状态对象，或者是null</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207150013930.png" alt="image-20220207150013930"></p>
+<p>我们先返回一个null</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207150040494.png" alt="image-20220207150040494"></p>
+<p>流程按照流程图正常显示了</p>
+<p>但当我们返回一个状态对象 </p>
+<blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;<span class="attr">count</span>: <span class="number">108</span>&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>我们发现显示的值不变了，+ 1 按钮也失灵了</p>
+<p>实际上，这个钩子就收到的参数，是<strong>props</strong></p>
+<blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> getDerivedStateFromProps(props)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>此方法适用于罕见的用例，即state的值在任何时刻都取决于props</p>
+<p>需要注意的是，派生状态会导致代码冗杂，导致组件难以维护</p>
+<h5 id="getSnapshotBeforeUpdate（更新之前获取快照）"><a href="#getSnapshotBeforeUpdate（更新之前获取快照）" class="headerlink" title="getSnapshotBeforeUpdate（更新之前获取快照）"></a>getSnapshotBeforeUpdate（更新之前获取快照）</h5><blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">getSnapshotBeforeUpdate</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;getSnapshotBeforeUpdate&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207151348202.png" alt="image-20220207151348202"></p>
+<p>要求我们返回null或者快照，null的话更上一个相似，都pass了</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220207152843950.png" alt="image-20220207152843950"></p>
+<p>案例</p>
+<p>当我们想实现滚动条增长，同时停在某一行时，我们可以用快照保存之前的长度，并使用<code>componentDidUpdate(preProps, preState, height)</code>接受快照，令当前的scrollTop += scrollHeight - 传入的长度，实现停留</p>
+<hr>
+<h4 id="总结：新生命周期"><a href="#总结：新生命周期" class="headerlink" title="总结：新生命周期"></a>总结：新生命周期</h4><p><strong>1.</strong> <strong>初始化阶段:</strong> 由ReactDOM.render()触发—初次渲染</p>
+<p>\1.    constructor()</p>
+<p><strong>2.</strong>   <strong>getDerivedStateFromProps</strong> </p>
+<p>\3.    render()</p>
+<p>\4.    componentDidMount()</p>
+<p>   <strong>2.</strong> <strong>更新阶段:</strong> 由组件内部this.setSate()或父组件重新render触发</p>
+<p><strong>1.</strong>   <strong>getDerivedStateFromProps</strong></p>
+<p>\2.    shouldComponentUpdate()</p>
+<p>\3.    render()</p>
+<p><strong>4.</strong>   <strong>getSnapshotBeforeUpdate</strong></p>
+<p>\5.    componentDidUpdate()</p>
+<p>   <strong>3.</strong> <strong>卸载组件:</strong> 由ReactDOM.unmountComponentAtNode()触发</p>
+<p>\1.    componentWillUnmount()</p>
+<hr>
+<h3 id="DOM的diffing算法-与-key"><a href="#DOM的diffing算法-与-key" class="headerlink" title="DOM的diffing算法 与 key"></a>DOM的diffing算法 与 key</h3><h4 id="DOM的diffing算法-amp-amp-key"><a href="#DOM的diffing算法-amp-amp-key" class="headerlink" title="DOM的diffing算法 &amp;&amp; key"></a>DOM的diffing算法 &amp;&amp; key</h4><p>当状态中的数据发生变化时，react会根据【新数据】生成【新的虚拟DOM】, 随后React进行【新虚拟DOM】与</p>
+<p>【旧虚拟DOM】的diff比较，规则如下：</p>
+<p><strong>key是虚拟DOM对象的标识, 在更新显示时key起着极其重要的作用</strong></p>
+<blockquote>
+<p>a. 旧虚拟DOM中找到了与新虚拟DOM相同的key：<br>             (1).若虚拟DOM中内容没变, 直接使用之前的真实DOM<br>             (2).若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM</p>
+<p>b. 旧虚拟DOM中未找到与新虚拟DOM相同的key<br>             根据数据创建新的真实DOM，随后渲染到到页面</p>
+</blockquote>
+<p>我们以下面的题目为例</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220208093136188.png" alt="image-20220208093136188"></p>
+<p>需求如图所示</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220208093150236.png" alt="image-20220208093150236"></p>
+<p>由于两者用的key不同，导致其效率有着较大差异，且会发生问题</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220208093826423.png" alt="image-20220208093826423"></p>
+<p>可以发现，上面的发生了数据偏移，这是个严重错误</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220208093321765.png" alt="image-20220208093321765"></p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/image-20220208093335416.png" alt="image-20220208093335416"></p>
+<p>通过上面两幅图进行对比，</p>
+<p>首先是<strong>效率</strong>问题，我们发现，由于p1是用index（索引值）作为key，当新元素放到首位时，全体元素的所引发生变化，导致所有元素都重新加载了一遍，而p2则只需加载一遍</p>
+<p>其次是<strong>数据</strong>问题，由于diffing是<strong>分层比较的</strong>，因此在p1中，“更新小王”和“初始小张”比较，发现外层不同后，仍然进入内层比较，并认为type相同，因此保留下来了“初始小张”的框，而到最后，React发现没有索引值为2的元素，所以把”小李“和一个没输入的框挂了上去；而p2使用<strong>id</strong>比较，各个标签都能找到对应的元素</p>
+<p>我们进行总结：</p>
+<p>（1）用index作为key可能会引发的问题：</p>
+<ul>
+<li><p>若对数据进行：逆序添加、逆序删除等破坏顺序操作:    DOM更新 ==&gt; 界面效果没问题, 但效率低。</p>
+</li>
+<li><p>如果结构中还包含输入类的DOM会产生错误DOM更新     ==&gt;     界面有问题。</p>
+</li>
+<li><p>注意！如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，使用index作为key是没有问题的</p>
+</li>
+</ul>
+<p>（2）开发中如何选择key?</p>
+<ul>
+<li>最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。</li>
+<li>如果确定只是简单的展示数据，用index也是可以的。</li>
+</ul>
+</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">W</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://0410wzn.top/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/">https://0410wzn.top/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/React/">React</a></div><div class="post_share"><div class="social-share" data-image="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/18/C++STL%E6%80%BB%E7%BB%93/"><img class="next-cover" src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/im01オープニング02c_ピン前a.bmp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">C++STL总结</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/ev草・郎汎用02c1.bmp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">W</div><div class="author-info__description">Less intrests , more interest .</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">9</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#React%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">React（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-React%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">第一章    React基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">React简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">What</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Why"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Why</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">How</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hello-React"><span class="toc-number">1.1.2.</span> <span class="toc-text">Hello React</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDOM%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.3.</span> <span class="toc-text">虚拟DOM的两种创建方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDOM%E4%B8%8E%E7%9C%9F%E5%AE%9EDOM"><span class="toc-number">1.1.4.</span> <span class="toc-text">虚拟DOM与真实DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jsx%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="toc-number">1.1.5.</span> <span class="toc-text">jsx语法规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%95%E4%B8%BAJS%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.1.6.</span> <span class="toc-text">何为JS表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%B8%8E%E6%A8%A1%E5%9D%97%EF%BC%86%EF%BC%86%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8E%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-number">1.1.7.</span> <span class="toc-text">组件与模块＆＆模块化与组件化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-React%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">第二章    React面向组件编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.1.</span> <span class="toc-text">函数式组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%A4%8D%E4%B9%A0"><span class="toc-number">1.2.2.</span> <span class="toc-text">类的复习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%BC%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">类式组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%BB%84%E4%BB%B6-amp-amp-%E5%A4%8D%E6%9D%82%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.4.</span> <span class="toc-text">简单组件 &amp;&amp; 复杂组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%AE%9E%E4%BE%8B%E7%9A%84%E4%B8%89%E5%A4%A7%E5%B1%9E%E6%80%A7%E4%B9%8B%E4%B8%80-%E2%80%94-state"><span class="toc-number">1.2.5.</span> <span class="toc-text">组件实例的三大属性之一 — state</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#React%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">React中的事件绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95this%E7%9A%84%E6%8C%87%E5%90%91"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">类中方法this的指向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setState"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">setState</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#state%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.5.4.</span> <span class="toc-text">state总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%AE%9E%E4%BE%8B%E7%9A%84%E4%B8%89%E5%A4%A7%E5%B1%9E%E6%80%A7%E4%B9%8B%E4%B8%80-%E2%80%94-props"><span class="toc-number">1.2.6.</span> <span class="toc-text">组件实例的三大属性之一 — props</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E4%BC%A0%E9%80%92props"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">批量传递props</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%A6-%E2%80%94-%E5%B1%95%E5%BC%80%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">… — 展开运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9props%E8%BF%9B%E8%A1%8C%E9%99%90%E5%88%B6"><span class="toc-number">1.2.6.3.</span> <span class="toc-text">对props进行限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#props%E7%9A%84%E7%AE%80%E5%86%99%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.6.4.</span> <span class="toc-text">props的简写方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%BC%8F%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8%E4%B8%8Eprops"><span class="toc-number">1.2.6.5.</span> <span class="toc-text">类式组件中的构造器与props</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6%E4%B8%8E%E4%BD%BF%E7%94%A8props"><span class="toc-number">1.2.6.6.</span> <span class="toc-text">函数式组件与使用props</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#props%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.6.7.</span> <span class="toc-text">props总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%AE%9E%E4%BE%8B%E7%9A%84%E4%B8%89%E5%A4%A7%E5%B1%9E%E6%80%A7%E4%B9%8B%E4%B8%80-%E2%80%94-ref"><span class="toc-number">1.2.7.</span> <span class="toc-text">组件实例的三大属性之一 — ref</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9E%8B%E7%9A%84ref"><span class="toc-number">1.2.7.1.</span> <span class="toc-text">字符串型的ref</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E8%B0%83%E5%BD%A2%E5%BC%8F%E7%9A%84ref"><span class="toc-number">1.2.7.2.</span> <span class="toc-text">回调形式的ref</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E8%B0%83%E5%BD%A2%E5%BC%8Fref%E8%B0%83%E7%94%A8%E6%AC%A1%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.7.3.</span> <span class="toc-text">回调形式ref调用次数的问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createRef%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.7.4.</span> <span class="toc-text">createRef的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-number">1.2.8.</span> <span class="toc-text">React中的事件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E4%B8%8E%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.9.</span> <span class="toc-text">受控组件与非受控组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXP-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-amp-amp-%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-number">1.2.10.</span> <span class="toc-text">EXP    高阶函数 &amp;&amp; 函数柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.11.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.11.1.</span> <span class="toc-text">引入生命周期</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">内容规律变浅，消失后出现
+2.点击，组件消失
+
+如何卸载一个组件？
+
+实现需求如果将定时器设置在render里，定时器会发生嵌套，变化速度越来越快，占用越来越多，我们先折中一下，再布置一个按钮，将需求先完成
+
+那么React是否有办法，在内容挂载到页面后，帮助我们调用一次定时器呢？
+render的兄弟 — componentDidMount
+我们知道，render调用的时机有两个：
+（1）初始化渲染
+（2）状态更新之后
+而componentDidMount则只在一个时候调用：组件挂载完毕
+因此我们可以这样写
+
+但是，这样仍存在一些错误，当我们点击，确实木大了，但是控制台提出了抗议
+
+组件没了，不能再更新状态了！所以我们还需要清空定时器
+可以这样
+
+但还可以这样
+我们从这里可以看出，React总是提前准备了一些函数，再合适的时候做着合适的事情，而这些事情，如下图所示
+
+这些函数被叫做：
+
+ 生命周期回调函数 &lt;&#x3D;&gt; 生命周期钩子函数 &lt;&#x3D;&gt; 生命周期函数 &lt;&#x3D;&gt; 生命周期钩子
+
+而函数也不仅仅只有这两个，我们将在下面几小节讨论
+
+生命周期（旧）理解：
+1、组件从创建到死亡会经历一些特殊的阶段
+2、React组件包含一系列钩子函数（生命周期回调函数），会在特定时刻调用
+3、我们在定义组件时，会在特定的生命周期回调函数中，做特定的工作
+生命周期流程图（旧）
+
+这里以求和为案例
+挂载时：
+
+
+
+更新时
+我们添加
+
+可以发现，页面开始并没有打印，而当我们按下更新之后
+
+打印执行，这就是更新的含义
+而在更新时，有三条路可以走
+
+线路2
+setState已经很熟悉了，pass
+shouldComponentUpdate
+其中的shouldComponentUpdate（是否更新），类似于一个阀门，返回true，代表更新可以进行，而返回false，代表更新不被允许（默认返回true）
+我们添加这个钩子（返回true），再点击 + 1
+
+
+正如上面所说，每次更新之前都询问了“阀门状态”
+componentWillUpdate
+添加钩子，点击 +1 之后的控制台
+
+
+componentDidUpdate
+添加钩子，点击 +1 之后的控制台
+
+
+线路3
+forceUpdate（强制更新）
+不对状态做出更改（不管阀门），强制更新组件
+我们把阀门设为false，尝试一下
+
+
+果然绕过了阀门
+线路1
+我们要先在两个组件之间构建父子关系
+
+
+
+我们想通过A组件，展示B组件的信息
+componentWillReceiveProps
+由于是B组件从外部（A）接收标签，我们添加钩子查看
+
+点开之后，没有？？？！！！
+实际上，这个钩子有个“坑“，第一次传的不算
+我们点击按钮（由于挂载页面时已经render一回了，这次便是第二次执行，B组件也接收到了新的props），
+点之前
+
+点之后
+
+
+总结：旧生命周期1. 初始化阶段: 由ReactDOM.render()触发—初次渲染
+\1.    constructor()
+\2.    componentWillMount()
+\3.    render()        &#x3D;&#x3D;&#x3D;&gt;        必须
+\4.    componentDidMount()        &#x3D;&#x3D;&#x3D;&gt;        常用
+​            用于初始化，如：开启定时器、发送网络请求、订阅消息
+   2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
+\1.    shouldComponentUpdate()
+\2.    componentWillUpdate()
+\3.    render()        &#x3D;&#x3D;&#x3D;&gt;        必须
+\4.    componentDidUpdate()
+   3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+\1.    componentWillUnmount()        &#x3D;&#x3D;&#x3D;&gt;        常用
+​            用于”收尾“，如：关闭定时器、取消订阅消息
+
+新旧生命周期对比我们将上面求和的例子中的引入的React换为新版本，发现代码可以正常挂载，but
+
+这些警告说明了旧钩子在新版本中也可以用，但不被推荐使用，同时两个函数名称发生改变
+
+
+更改之后，下面的两个警告disappear了
+简记：所有带”will“的钩子（3个），在新版本都推荐前置UNSAFE_（无关安全性，是警告可能在未来版本中出现bug），除了 componentWillUnmount
+官方文档中提出，那3个需要加前缀的钩子，都即将过时！！！
+我们在下面重新展示新旧的生命周期图，进行对比
+
+
+首先，带有will的几个”_UNSAFE“钩子没有再新周期图中出现
+其次，新周期图多了getDerivedStateFromProps（挂载时）、getSnapshotBeforeUpdate（更新时）这两个新钩子
+
+生命周期（新）这里先说一下新生命周期的几个钩子
+getDerivedStateFromProps（从props得到派生的状态）我们将其添加进组件
+
+意想不到的事情发生了
+
+警告告诉我们，这个钩子挂到了实例上，请定义它，把它作为一个静态方法
+加上 static之后
+
+返回又不对了，它要求只能返回一个状态对象，或者是null
+
+我们先返回一个null
+
+流程按照流程图正常显示了
+但当我们返回一个状态对象 
+
+1
+return {count: 108}
+
+
+我们发现显示的值不变了，+ 1 按钮也失灵了
+实际上，这个钩子就收到的参数，是props
+
+1
+static getDerivedStateFromProps(props)
+
+
+此方法适用于罕见的用例，即state的值在任何时刻都取决于props
+需要注意的是，派生状态会导致代码冗杂，导致组件难以维护
+getSnapshotBeforeUpdate（更新之前获取快照）
+1
+2
+3
+getSnapshotBeforeUpdate() {
+    console.log(&#39;getSnapshotBeforeUpdate&#39;)
+}
+
+
+
+要求我们返回null或者快照，null的话更上一个相似，都pass了
+
+案例
+当我们想实现滚动条增长，同时停在某一行时，我们可以用快照保存之前的长度，并使用componentDidUpdate(preProps, preState, height)接受快照，令当前的scrollTop +&#x3D; scrollHeight - 传入的长度，实现停留
+
+总结：新生命周期1. 初始化阶段: 由ReactDOM.render()触发—初次渲染
+\1.    constructor()
+2.   getDerivedStateFromProps 
+\3.    render()
+\4.    componentDidMount()
+   2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
+1.   getDerivedStateFromProps
+\2.    shouldComponentUpdate()
+\3.    render()
+4.   getSnapshotBeforeUpdate
+\5.    componentDidUpdate()
+   3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+\1.    componentWillUnmount()
+
+DOM的diffing算法 与 keyDOM的diffing算法 &amp;&amp; key当状态中的数据发生变化时，react会根据【新数据】生成【新的虚拟DOM】, 随后React进行【新虚拟DOM】与
+【旧虚拟DOM】的diff比较，规则如下：
+key是虚拟DOM对象的标识, 在更新显示时key起着极其重要的作用
+
+a. 旧虚拟DOM中找到了与新虚拟DOM相同的key：
+             (1).若虚拟DOM中内容没变, 直接使用之前的真实DOM
+             (2).若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM
+b. 旧虚拟DOM中未找到与新虚拟DOM相同的key
+             根据数据创建新的真实DOM，随后渲染到到页面
+
+我们以下面的题目为例
+
+需求如图所示
+
+由于两者用的key不同，导致其效率有着较大差异，且会发生问题
+
+可以发现，上面的发生了数据偏移，这是个严重错误
+
+
+通过上面两幅图进行对比，
+首先是效率问题，我们发现，由于p1是用index（索引值）作为key，当新元素放到首位时，全体元素的所引发生变化，导致所有元素都重新加载了一遍，而p2则只需加载一遍
+其次是数据问题，由于diffing是分层比较的，因此在p1中，“更新小王”和“初始小张”比较，发现外层不同后，仍然进入内层比较，并认为type相同，因此保留下来了“初始小张”的框，而到最后，React发现没有索引值为2的元素，所以把”小李“和一个没输入的框挂了上去；而p2使用id比较，各个标签都能找到对应的元素
+我们进行总结：
+（1）用index作为key可能会引发的问题：
+
+若对数据进行：逆序添加、逆序删除等破坏顺序操作:    DOM更新 &#x3D;&#x3D;&gt; 界面效果没问题, 但效率低。
+
+如果结构中还包含输入类的DOM会产生错误DOM更新     &#x3D;&#x3D;&gt;     界面有问题。
+
+注意！如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，使用index作为key是没有问题的
+
+
+（2）开发中如何选择key?
+
+最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
+如果确定只是简单的展示数据，用index也是可以的。
+
+</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8D%B8%E8%BD%BD%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6%EF%BC%9F"><span class="toc-number">1.3.0.0.1.</span> <span class="toc-text">如何卸载一个组件？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%9C%80%E6%B1%82"><span class="toc-number">1.3.0.0.2.</span> <span class="toc-text">实现需求</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">确实木大了，但是控制台提出了抗议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E6%97%A7%EF%BC%89"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">生命周期（旧）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E6%97%A7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">总结：旧生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E6%97%A7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">新旧生命周期对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E6%96%B0%EF%BC%89"><span class="toc-number">1.4.0.4.</span> <span class="toc-text">生命周期（新）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getDerivedStateFromProps%EF%BC%88%E4%BB%8Eprops%E5%BE%97%E5%88%B0%E6%B4%BE%E7%94%9F%E7%9A%84%E7%8A%B6%E6%80%81%EF%BC%89"><span class="toc-number">1.4.0.4.1.</span> <span class="toc-text">getDerivedStateFromProps（从props得到派生的状态）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#getSnapshotBeforeUpdate%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B9%8B%E5%89%8D%E8%8E%B7%E5%8F%96%E5%BF%AB%E7%85%A7%EF%BC%89"><span class="toc-number">1.4.0.4.2.</span> <span class="toc-text">getSnapshotBeforeUpdate（更新之前获取快照）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E6%96%B0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.4.0.5.</span> <span class="toc-text">总结：新生命周期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM%E7%9A%84diffing%E7%AE%97%E6%B3%95-%E4%B8%8E-key"><span class="toc-number">1.4.1.</span> <span class="toc-text">DOM的diffing算法 与 key</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM%E7%9A%84diffing%E7%AE%97%E6%B3%95-amp-amp-key"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">DOM的diffing算法 &amp;&amp; key</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/" title="React（一）"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React（一）"/></a><div class="content"><a class="title" href="/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/" title="React（一）">React（一）</a><time datetime="2022-02-02T13:54:07.000Z" title="Created 2022-02-02 21:54:07">2022-02-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/18/C++STL%E6%80%BB%E7%BB%93/" title="C++STL总结"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/im01オープニング02c_ピン前a.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++STL总结"/></a><div class="content"><a class="title" href="/2022/01/18/C++STL%E6%80%BB%E7%BB%93/" title="C++STL总结">C++STL总结</a><time datetime="2022-01-18T11:54:20.000Z" title="Created 2022-01-18 19:54:20">2022-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/06/BuuCTF-Pwn-WP/" title="BuuCTF Pwn WP"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/im02l空(夕b).bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BuuCTF Pwn WP"/></a><div class="content"><a class="title" href="/2022/01/06/BuuCTF-Pwn-WP/" title="BuuCTF Pwn WP">BuuCTF Pwn WP</a><time datetime="2022-01-06T13:54:07.000Z" title="Created 2022-01-06 21:54:07">2022-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/08/BUUCTF-MISC-WP-%E6%9B%B4%E6%96%B0ing/" title="BUUCTF_MISC_WP(更新ing)"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg04l三咲町01坂道上り-(昼).bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BUUCTF_MISC_WP(更新ing)"/></a><div class="content"><a class="title" href="/2021/12/08/BUUCTF-MISC-WP-%E6%9B%B4%E6%96%B0ing/" title="BUUCTF_MISC_WP(更新ing)">BUUCTF_MISC_WP(更新ing)</a><time datetime="2021-12-08T14:14:59.000Z" title="Created 2021-12-08 22:14:59">2021-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/" title="攻防世界PWN新手区WP（长期更新）"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/background/bg03旧校舎03(夏).bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="攻防世界PWN新手区WP（长期更新）"/></a><div class="content"><a class="title" href="/2021/11/17/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CPWN%E6%96%B0%E6%89%8B%E5%8C%BAWP%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0%EF%BC%89/" title="攻防世界PWN新手区WP（长期更新）">攻防世界PWN新手区WP（长期更新）</a><time datetime="2021-11-17T11:02:54.000Z" title="Created 2021-11-17 19:02:54">2021-11-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By W</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="000PeZCQ1i4XVs" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script async data-pjax src="/js/background.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
