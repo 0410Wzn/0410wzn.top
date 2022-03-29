@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://0410wzn.top/2022/03/29/01%20DL-Neural-Networks-and-Deep-Learning/</loc>
+    <loc>https://0410wzn.top/2022/03/29/02%20DL-Improving-Deep-Neural-Networks-Hyperparameter-Tuning-Regularization-and-Optimization/</loc>
     
     <lastmod>2022-03-29</lastmod>
     
   </url>
   
   <url>
-    <loc>https://0410wzn.top/2022/03/29/02%20DL-Improving-Deep-Neural-Networks-Hyperparameter-Tuning-Regularization-and-Optimization/</loc>
+    <loc>https://0410wzn.top/2022/03/29/01%20DL-Neural-Networks-and-Deep-Learning/</loc>
     
     <lastmod>2022-03-29</lastmod>
     
@@ -117,13 +117,6 @@
   
   <url>
     <loc>https://0410wzn.top/tags/Deep-Learning/</loc>
-    <lastmod>2022-03-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://0410wzn.top/tags/Deep-learning/</loc>
     <lastmod>2022-03-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
