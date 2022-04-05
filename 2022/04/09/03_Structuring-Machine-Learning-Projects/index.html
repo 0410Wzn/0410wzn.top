@@ -1,0 +1,420 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh_Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization | 【W】</title><meta name="keywords" content="Deep_Learning"><meta name="author" content="[&quot;W&quot;]"><meta name="copyright" content="[&quot;W&quot;]"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Structuring Machine Learning ProjectsML Strategy (1)Why ML Strategy（机器学习策略）什么是机器学习策略？ 假设我们正在调试🐱分类器，经过一段时间调试，系统的准确率达到了90%，但还有不少能提升准确率的方法，在下图中我们列出一部分  上述的诸多想法我们都可以进行测试，但问题在于，如果做出了错误的选择，可能会浪费大量时间，朝错误的方向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization">
+<meta property="og:url" content="https://0410wzn.top/2022/04/09/03_Structuring-Machine-Learning-Projects/index.html">
+<meta property="og:site_name" content="【W】">
+<meta property="og:description" content="Structuring Machine Learning ProjectsML Strategy (1)Why ML Strategy（机器学习策略）什么是机器学习策略？ 假设我们正在调试🐱分类器，经过一段时间调试，系统的准确率达到了90%，但还有不少能提升准确率的方法，在下图中我们列出一部分  上述的诸多想法我们都可以进行测试，但问题在于，如果做出了错误的选择，可能会浪费大量时间，朝错误的方向">
+<meta property="og:locale">
+<meta property="og:image" content="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202204052243024.bmp">
+<meta property="article:published_time" content="2022-04-09T14:37:21.000Z">
+<meta property="article:modified_time" content="2022-04-05T14:43:22.583Z">
+<meta property="article:author" content="W">
+<meta property="article:tag" content="Deep_Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202204052243024.bmp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://0410wzn.top/2022/04/09/03_Structuring-Machine-Learning-Projects/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-05 22:43:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="【W】" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/ev草・郎汎用02c1.bmp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202204052243024.bmp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">【W】</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-04-09T14:37:21.000Z" title="Created 2022-04-09 22:37:21">2022-04-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-04-05T14:43:22.583Z" title="Updated 2022-04-05 22:43:22">2022-04-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Structuring-Machine-Learning-Projects"><a href="#Structuring-Machine-Learning-Projects" class="headerlink" title="Structuring Machine Learning Projects"></a>Structuring Machine Learning Projects</h1><h2 id="ML-Strategy-1"><a href="#ML-Strategy-1" class="headerlink" title="ML Strategy (1)"></a>ML Strategy (1)</h2><h3 id="Why-ML-Strategy（机器学习策略）"><a href="#Why-ML-Strategy（机器学习策略）" class="headerlink" title="Why ML Strategy（机器学习策略）"></a>Why ML Strategy（机器学习策略）</h3><p>什么是机器学习策略？</p>
+<p>假设我们正在调试🐱分类器，经过一段时间调试，系统的准确率达到了90%，但还有不少能提升准确率的方法，在下图中我们列出一部分</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031418667.png" alt></p>
+<p>上述的诸多想法我们都可以进行测试，但问题在于，如果做出了错误的选择，可能会浪费大量时间，朝错误的方向前进（同时注意不到错误），因此我们需要一些策略，来判断哪些方法是值得一试的，哪些是可以舍弃的，或者提出新的方法</p>
+<hr>
+<h3 id="Orthogonaization（正交化）"><a href="#Orthogonaization（正交化）" class="headerlink" title="Orthogonaization（正交化）"></a>Orthogonaization（正交化）</h3><p>搭建机器学习模型时所面临的一个重要的问题是：可以尝试和改变的东西太多了</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031428633.png" alt></p>
+<p>以这台老电视机为例。当我们要调整图像时，需要调整旋钮，我们可以很简单的知道，如果有一个旋钮集成了图像的长、宽、色度等信息时，我们要对图像进行合适的调整其实是很麻烦的，因此，电视的设计者将旋钮分为多个，每一个都对应着不同的属性，这即是正交化的思想（正交即为互成90度）</p>
+<p>我们将其放在机器学习中思考</p>
+<p>对于一个监督学习系统。通常需要调整系统的“旋钮”，确保四件事：</p>
+<ul>
+<li>系统在训练集上的效果不错</li>
+<li>系统在开发集上有良好表现</li>
+<li>系统在测试集上表现良好</li>
+<li>真实结果反馈</li>
+</ul>
+<p>对于“旋钮”，当算法在成本函数上不能很好的拟合训练集，这个旋钮就意味着“训练更大的网络”或者“选择更好的算法”；<br>当算法对开发集的拟合很差，那么应该有一组独立的“旋钮”去调试；<br>对于开发集，有“正则化”和“增大训练集”等“旋钮”；<br>对于测试集，“旋钮“可能是”更大的开发集”&lt;这种情况有可能是对开发集过拟合了&gt;；<br>对于反馈，”旋钮“就有可能是”改变开发集“或”成本函数“&lt;错误可能是开发集分布设置不正确或是成本函数测量的指标不对&gt;</p>
+<hr>
+<h3 id="Single-number-evaluation-metric（单一数字评估指标）"><a href="#Single-number-evaluation-metric（单一数字评估指标）" class="headerlink" title="Single number evaluation metric（单一数字评估指标）"></a>Single number evaluation metric（单一数字评估指标）</h3><p>对于下面的应用</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031531989.png" alt></p>
+<p>上面两列分别是它的查准率和查全率，但当我们想判断选择哪个时，问题来了？这两者孰优孰劣？</p>
+<p>我们引入F1分数（两者的调和平均数）进行比较，这种方法有助于快速迭代</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031534716.png" alt></p>
+<p>通过它进行判断，我们最终选择了A</p>
+<hr>
+<h3 id="Satisficing-and-Optimizing-Metric"><a href="#Satisficing-and-Optimizing-Metric" class="headerlink" title="Satisficing and Optimizing Metric"></a>Satisficing and Optimizing Metric</h3><p>要把顾及到的所有事物组合成单实数评估指标，有时并不容易，因此，在一些情况下，设立满足与优化指标是很有用的</p>
+<p>下图为例</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031555088.png" alt></p>
+<p>假设我们最看重的是准确度，但同时我们也应该注意到识别图像所花费的时间，因此我们可以将准确度与运行时间组合成一个整体评估指标</p>
+<p>我们可以选择对两个数值加权求和，但通常，选择一个 <strong>”定义优化 &amp;&amp; 满足指标“</strong> 的分类器应该更为合适 </p>
+<hr>
+<h3 id="Train-Dev-Test-Distributions"><a href="#Train-Dev-Test-Distributions" class="headerlink" title="Train/Dev/Test Distributions"></a>Train/Dev/Test Distributions</h3><p>本节主题：如何设立开发集和测试集？</p>
+<ul>
+<li>开发集与测试集应来自于同一分布（可以取同一分布内的数据随机分布）</li>
+<li>开发集与测试集的结果应该是符合预期的</li>
+</ul>
+<hr>
+<h3 id="Size-of-the-Dev-and-Test-Sets"><a href="#Size-of-the-Dev-and-Test-Sets" class="headerlink" title="Size of the Dev and Test Sets"></a>Size of the Dev and Test Sets</h3><p>怎样确定开发集与测试集的规模？</p>
+<p>Old </p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031647235.png" style="zoom: 70%"><br>Model</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204031657084.png" alt></p>
+<p>怎样选择测试集的规模呢？</p>
+<p>我们知道，测试集的目的是完成开发之后，测试集用来评估其性能，因此，方针就是，让测试集尽可能大，能够以高置信度评估性能</p>
+<hr>
+<h3 id="When-to-Change-Dev-Test-Sets-and-Metrics-（什么时候改变开发-测试集与指标）"><a href="#When-to-Change-Dev-Test-Sets-and-Metrics-（什么时候改变开发-测试集与指标）" class="headerlink" title="When to Change Dev/Test Sets and Metrics?（什么时候改变开发/测试集与指标）"></a>When to Change Dev/Test Sets and Metrics?（什么时候改变开发/测试集与指标）</h3><p>假设正在创建一个猫分类器，试图找到很多猫的照片，算法A与B分别有3%与5%的错误率，这样看来，算法A似乎表现得很好</p>
+<p>但是当实际应用时，算法A错把XX图像当成猫图，尽管它推送了更多猫图，但是与需求（only 🐱！）发生了冲突，而B，5%的错误率使分类器得到较少的图像，但是并没有传进XX图，因此从实际出发，算法B实际上是一个更好的算法</p>
+<p>在上述事件中，发生的就是，事件A在评估指标上做的更好，但从需求的角度出发，它无疑是一个比较糟糕的算法 </p>
+<p>在这种情况下，评估指标加上开发集都倾向于选择A，但需求制定者更偏向于B，因此当你的评估指标无法正确衡量算法之间的优劣排序时，在这种情况下，原来的指标错误的预测算法A是更好的算法，这就发出了信号，你应该<strong>改变评估指标</strong>或者<strong>开发集/测试集</strong>了！</p>
+<p>此时使用的分类错误率指标</p>
+<font size="5px">$Error\,=\,\frac{1}{m_{dev}}\,\sum^{m_{dev}}_{i=1}I\{y^{(i)}_pred\,+\,y^{(i)}\}$</font>
+
+<p> 其中一个修改评估指标的方法是：添加权重项</p>
+<font size="5px">$Error\,=\,\frac{1}{m_{dev}}\,\sum^{m_{dev}}_{i=1}w^{(i)}I\{y^{(i)}_pred\,+\,y^{(i)}\}$</font>
+
+<p>通过这个公式。我们给予不符合预期的图片更大的权重，以此让它们迅速变大</p>
+<p>从上面的例子我们可以得出一个粗浅的结论：<strong>如果评估指标无法正确评估好算法的排名</strong>，我们需要改变它</p>
+<hr>
+<h3 id="Why-Human-level-Performance"><a href="#Why-Human-level-Performance" class="headerlink" title="Why Human-level Performance?"></a>Why Human-level Performance?</h3><p>机器学习往往擅长模仿人能做的事</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204032002008.png" alt></p>
+<p>可以发现，一旦超过人类的水平，增长的明显变缓，最终贴近于上面的那条线 — 贝叶斯最优错误率</p>
+<hr>
+<h3 id="Avoidable-Bias"><a href="#Avoidable-Bias" class="headerlink" title="Avoidable Bias"></a>Avoidable Bias</h3><p>在计算机视觉上，人类达到的误差与贝叶斯错误率相差不多，这时候我们将它们近似，在这种情况下，具有同样的训练错误率与开发错误率，我们决定于减少偏差（方差）的策略，而训练错误率与开发错误率之间的偏差，就大概说明了算法在方差问题上的改善空间，可以运用正则化等手段</p>
+<p>我们将贝叶斯错误率的估计与训练错误率之间的差值，称为可避免偏差，这一概念，说明了有一些别的偏差，或错误率有个无法超越的最低水平</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204032020879.png" alt></p>
+<p>由此，对于上述情况<br>左边适合调整可避免偏差，而右边调整方差<br>因此，不同的场景，有不同的策略</p>
+<hr>
+<h3 id="Understanding-Human-level-Performance"><a href="#Understanding-Human-level-Performance" class="headerlink" title="Understanding Human-level Performance"></a>Understanding Human-level Performance</h3><p>思考人类水平错误率的方式之一，是将其作为贝叶斯错误率的替代或估计（这时我们往往将其看作多数人考虑后的错误率，而非个人）</p>
+<p>在定义人类水平错误率时，要清楚目标所在，如果要表明可以超过单个人类，那么就有理由在某些场合部署你的系统</p>
+<hr>
+<h3 id="Improving-your-Model-Performance（改善模型表现）"><a href="#Improving-your-Model-Performance（改善模型表现）" class="headerlink" title="Improving your Model Performance（改善模型表现）"></a>Improving your Model Performance（改善模型表现）</h3><p>总结：正交化  设立开发集与测试集  用人类水平错误率估计贝叶斯错误率  估计可避免偏差与方差</p>
+<p>想让一个监督学习算法达到实用，基本上需要完成2件事：</p>
+<p>首先，算法对训练集的拟合很好，这可以看作可避免偏差很低</p>
+<p>其次，在训练集中效果优良，然后推广到开发集和测试集也很好，这就是说方差不是太大</p>
+<p>在正交化精神下，我们模拟出了”旋钮”，可以修正可偏差问题（训练更大的网络/训练更久），还有一套独立的“旋钮”可以用来处理方差问题（正则化/收集更多训练数据）</p>
+<p>总结一下前几解的步骤，若想提高机器学习系统的性能，可以看训练错误率与贝叶斯估计值之间的距离，从而判断可避免偏差的大小（对训练集大小的优化还有多少空间），然后看开发错误率与训练错误率之间的距离，从而判断方差问题的大小（应该做多少努力，使算法表现能够从训练集推广到开发集）</p>
+<p>当目标在减少可避免偏差时，可以尝试：</p>
+<ul>
+<li>使用规模更大的模型</li>
+<li>训练更久</li>
+<li>使用更好的优化算法（加入momentum/RMSprop）/算法（Adam）</li>
+<li>寻找更好的新神经网络架构</li>
+<li>一组更好的超参数</li>
+</ul>
+<p>当目标在改变方差时，可以尝试：</p>
+<ul>
+<li>收集更多数据训练（可以更好的推广到系统看不到的开发集数据）</li>
+<li>正则化 </li>
+<li>数据扩增</li>
+<li>寻找更好的新神经网络架构（超参数搜索）</li>
+</ul>
+<hr>
+<h2 id="ML-Strategy-2"><a href="#ML-Strategy-2" class="headerlink" title="ML Strategy (2)"></a>ML Strategy (2)</h2><h3 id="Carrying-Out-Error-Analysis（误差分析）"><a href="#Carrying-Out-Error-Analysis（误差分析）" class="headerlink" title="Carrying Out Error Analysis（误差分析）"></a>Carrying Out Error Analysis（误差分析）</h3><p>我们以下面的情况为例</p>
+<p>对于已经大致训练好的🐱图分类器，它的错误率为90%，但是它对一些🐕图仍束手无策</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041216097.png" alt></p>
+<p>这种情况下，我们难道还需要专门做一个项目去处理🐕？这样值得吗？</p>
+<p>这里提供一套错误分析流程，去帮助判断这个方向是否值得努力</p>
+<ul>
+<li>收集部分带有错误标记的开发集例子</li>
+<li>挨个观察标记中有多少是🐕</li>
+<li>查看🐕在错误标记中所占的比例，判断对其进行更改的效果是否值得</li>
+</ul>
+<p><strong>人工统计在一些时候，确实能节省大量时间</strong></p>
+<p>使用表格判断方法是极为可取的</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041233815.png" alt></p>
+<hr>
+<h3 id="Cleaning-up-Incorrectly-labeled-data"><a href="#Cleaning-up-Incorrectly-labeled-data" class="headerlink" title="Cleaning up Incorrectly labeled data"></a>Cleaning up Incorrectly labeled data</h3><p>当观察数据时，发现某些输出标签Y是错的，是否值得花时间去修正呢？ </p>
+<p>首先去考虑训练集，深度学习算法对于训练集中的随机错误是相当健壮的，即如果错误项离随机错误项不太远，</p>
+<p>若错误足够随机，那么不管这些错误可能也没问题，而并不需要花太多时间去修复它们</p>
+<p>深度学习对随机错误比较健壮，但对系统性的错误相对就没那么健壮了</p>
+<p>而当开发集与测试集标记出现问题时该怎么办呢？  </p>
+<p>当你担心上述问题时，一般推荐在进行错误分析时，添加一个额外的列，统计它们的错误例子数  </p>
+<p>对于极少数例子数，你的分类器输出和标签不同，是因为标签出错，而非分类器出错</p>
+<p>同时，你也可以统计因为标签错误所占的百分比</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041552480.png" alt></p>
+<p>现在面临的问题是：是否值得修正6%标记出错的例子</p>
+<p>建议是：如果错误非常严重，很大程度上影响了你在开发集上评估算法的能力，那么就应该去花时间修正错误的标签，但当它们没有严重影响到用开发集评估成本偏差的能力，那么处理的必要就相对较轻了</p>
+<p>这里再提示一下<strong>设立开发集的主要目的</strong>：用它来从两个分类器A和B中选择一个 </p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041613479.png" alt></p>
+<p>我们有时无法直观的从开发集中选择一个分类器，因为它无法体现哪个分类器比较好，标记出错产生的错误率即是其原因，这是就有充分的理由去修正开发集里的错误标签 </p>
+<p>我们这时就可以对上图右方开发集的错误标签动手，因为其标记出错 ，对算法错误的整体评估标准有严重的影响；而在左边的开发集中，标记错误对算法影响的百分比还是相对较小的</p>
+<p>而再修改开发集数据之前，手动重新检查标签，并尝试修正一些标签，<strong>还有一些额外的方针与原则需要考虑</strong></p>
+<ul>
+<li>不管用何种修正手段，都要同时作用在开发集与测试集上（开发集是一个目标，当你命中目标之后，希望算法能够推广到测试集上，这样能够更高效的在来自同一分布的开发集和测试集上迭代）</li>
+<li>同时检验算法判断正确和错误的例子，错误的可能还有正确的，反之同理，若是只修改正确的，对算法的偏差可能会变大</li>
+</ul>
+<p>上述的两种注意事项实现较麻烦，因此也通常不会这么做，原因是：如果分类器很准确，那么判断错的次数比判断正确的次数要少得多</p>
+<p><strong>亲自花时间去检验错误是非常值得的</strong></p>
+<hr>
+<p> <img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041649727.png" alt></p>
+<hr>
+<h3 id="Training-and-testing-on-different-distributions"><a href="#Training-and-testing-on-different-distributions" class="headerlink" title="Training and testing on different distributions"></a>Training and testing on different distributions</h3><p>深度学习对训练数据的“胃口”很大，当你收集到足够多带标签的数据构成训练集时，算法效果最好，即便它们都来自于和开发集与测试集不同的数据来训练，这里有一些做法可以来处理训练集与测试集存在差异的状况</p>
+<p>以下题为例：</p>
+<p>对于来自于web与app的🐱图</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041718338.png" alt></p>
+<p>我们要通过上面的数据，划分数据，给出以下两种方案：</p>
+<p>Option1</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041716386.png" alt></p>
+<p>Option2</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041719574.png" alt></p>
+<p>我们的需求是建立一个系统，令其在处理手机上传图片分布时效果良好，因此我们选择第二种，因为它精确的“对准”了目标</p>
+<p>缺点在于训练集分布和开发集、测试集分布并不一样</p>
+<hr>
+<h3 id="Bias-and-Variance-with-mismatched-data-distributions"><a href="#Bias-and-Variance-with-mismatched-data-distributions" class="headerlink" title="Bias and Variance with mismatched data distributions"></a>Bias and Variance with mismatched data distributions</h3><p>估计学习算法的偏差和方差来确定接下来的优先方向，但是当训练集和开发、测试集来自于不同分布时，分析偏差和方差的方式可能不同</p>
+<p>通过对人类水平错误率、训练集错误率、训练 - 开发集错误率、开发集错误率进行分析，可以推断出可避免方差、方差、、数据不匹配问题各自多大 </p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041929065.png" alt></p>
+<hr>
+<h3 id="Addressing-data-mismatch（定位数据不匹配）"><a href="#Addressing-data-mismatch（定位数据不匹配）" class="headerlink" title="Addressing data mismatch（定位数据不匹配）"></a>Addressing data mismatch（定位数据不匹配）</h3><p>对来自不同分布的训练集与开发测试集，错误分析显示存在数据不匹配问题的状况，没有完全系统的解决方案，但可以尝试以下方案：</p>
+<ul>
+<li>亲自进行错误分析，尝试了解训练集与开发集的具体差异</li>
+<li>收集更多类似开发集和测试集的数据（包括人工合成）</li>
+</ul>
+<hr>
+<h3 id="Transfer-learning（迁移学习）"><a href="#Transfer-learning（迁移学习）" class="headerlink" title="Transfer learning（迁移学习）"></a>Transfer learning（迁移学习）</h3><p>神经网络从一个任务中习得知识，并将只是应用到另一个独立的任务中，即为迁移学习</p>
+<p>假设已经训练好一个图像识别神经网络</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204041949532.png" alt></p>
+<p>可以是判断🐱🐕，我们想将其用于X光诊断，做法是，将最后一层以及进入最后一层的权重删掉，然后为最后一层重新赋予权重，让后将其放在放射诊断数据上训练</p>
+<p>什么时候迁移学习是有意义的？</p>
+<p>若你想从任务A学习，并迁移一些新知识到任务B，那么</p>
+<ul>
+<li>当A与B都有同样的输入x时，迁移学习是有意义的，</li>
+<li>当任务A的数据比任务B多得多时，迁移学习的意义更大（在想提高任务B的性能，因为B的每个数据更有价值 ）</li>
+<li>任务A的低层次特征可以帮助B的学习，那么迁移学习更有意义一些</li>
+</ul>
+<hr>
+<h3 id="Multi-task-learning（多任务学习）"><a href="#Multi-task-learning（多任务学习）" class="headerlink" title="Multi-task learning（多任务学习）"></a>Multi-task learning（多任务学习）</h3><p>在迁移学习中，步骤是串行的，只是从任务A学习，然后迁移到任务B，而在多任务学习中，步骤是并行的，即试图让单个神经网络同时做多件事，希望每个任务都能帮助到其他所有任务  </p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204042012689.png" alt></p>
+<p>以上图为例，我们想同时辨别图片中的车、警示牌、行人、路灯等，因此对于输入图像$x^{(i)}$，那么将不再是一个标签(label)$y^{(i)}$，而是有四个标签 </p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204042017046.png" alt><br>因此，$y^{(i)}$是个$4*1$向量</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204042019959.png" alt></p>
+<p>与之对应的$Y$，及如上所示</p>
+<p><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/%E5%A4%8D%E4%B9%A0/202204042022250.png" alt></p>
+<p>与softmax回归的主要区别在于，softmax将单个标签分配给单个样本，而这张图可以存在很多不同标签 </p>
+<p>训练一个神经网络，试图最小化函数，就需要多任务学习，因为现在的需求是建立单个神经网络，观察每张图，解决4个问题 </p>
+<p>同时，多任务学习也可以处理只有部分物体被标记的情况 </p>
+<p>多任务学习什么时候有意义？</p>
+<ul>
+<li>训练的一组任务可以共用低层次特征</li>
+<li>通常情况下，每个任务的数据量都相当大</li>
+<li>多任务学习往往在以下场合更有意义：<ul>
+<li>可以训练一个<strong>足够大</strong>的网络去完成所有任务</li>
+<li>因此多任务学习的替代方法是，为每个任务训练一个单独的神经网络</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="End-to-end-deep-learning（端到端深度学习）"><a href="#End-to-end-deep-learning（端到端深度学习）" class="headerlink" title="End-to-end deep learning（端到端深度学习）"></a>End-to-end deep learning（端到端深度学习）</h3><p>举以下例子，</p>
+<p>目标是输入x，比如说一段音频，然后将其映射到一个输出y（即这段音频的听写文本），</p>
+<p>传统上，语音识别需要很多桥段的处理，首先会提取一些特征（MFCC），提取出一些低层次特征之后，可以应用机器学习算法，在音频片段中找到音位（声音的基本单位），将音位串在一起构成独立的词，然后将词串起来构成音频片段的听写文本，输出即是听写文本</p>
+<p>端到端则是输入音频，直接输出听写文本</p>
+<p>注意的是，端到端的方法适用于大规模数据进行训练，而较小规模的数据在传统流水线上效果反而更优秀 ，而如果是中间规模的数据，也可以使用中间件的方法，输入的依然还是音频，然后绕过特征提取，直接尝试从神经网络输出音位</p>
+<p>比如人脸识别系统，当人接近传感器时，会先捕捉整体图像（中间件），再通过裁剪获取局部的人脸信息，再进行辨别</p>
+<p>在数据对直接进行端到端学习有困难，而能较好地解决子问题时，通过解决子问题再回归到一端其实更为适合</p>
+<p>端到端的优点:</p>
+<ul>
+<li>数据说话</li>
+<li>所需的手工设计的组件更少</li>
+</ul>
+<p>端到端的缺点：</p>
+<ul>
+<li>需要大量数据</li>
+<li>排除了可能有用的手工组件</li>
+</ul>
+<p>学习算法有两个数据来源，一个是数据，另一个是手工设计的组件、功能······ </p>
+<p>当尝试使用端到端深度学习构建深度学习系统时，关键问题在于数据量的多少，已有数据能否支持直接学到从x映射到y</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">W</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://0410wzn.top/2022/04/09/03_Structuring-Machine-Learning-Projects/">https://0410wzn.top/2022/04/09/03_Structuring-Machine-Learning-Projects/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Deep-Learning/">Deep_Learning</a></div><div class="post_share"><div class="social-share" data-image="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202204052243024.bmp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/03/29/02_DL-Improving-Deep-Neural-Networks-Hyperparameter-Tuning-Regularization-and-Optimization/"><img class="next-cover" src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292221477.bmp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/03/29/00%20DL-Aim/" title="DL_Aim"><img class="cover" src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292219385.bmp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-29</div><div class="title">DL_Aim</div></div></a></div><div><a href="/2022/03/29/01_DL-Neural-Networks-and-Deep-Learning/" title="Neural_Networks_and_Deep_Learning"><img class="cover" src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292222632.bmp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-29</div><div class="title">Neural_Networks_and_Deep_Learning</div></div></a></div><div><a href="/2022/03/29/02_DL-Improving-Deep-Neural-Networks-Hyperparameter-Tuning-Regularization-and-Optimization/" title="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization"><img class="cover" src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292221477.bmp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-29</div><div class="title">Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/hexobackground/ev草・郎汎用02c1.bmp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">W</div><div class="author-info__description">Less intrests , more interest .</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Structuring-Machine-Learning-Projects"><span class="toc-number">1.</span> <span class="toc-text">Structuring Machine Learning Projects</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ML-Strategy-1"><span class="toc-number">1.1.</span> <span class="toc-text">ML Strategy (1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-ML-Strategy%EF%BC%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">Why ML Strategy（机器学习策略）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Orthogonaization%EF%BC%88%E6%AD%A3%E4%BA%A4%E5%8C%96%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">Orthogonaization（正交化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Single-number-evaluation-metric%EF%BC%88%E5%8D%95%E4%B8%80%E6%95%B0%E5%AD%97%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">Single number evaluation metric（单一数字评估指标）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Satisficing-and-Optimizing-Metric"><span class="toc-number">1.1.4.</span> <span class="toc-text">Satisficing and Optimizing Metric</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Train-Dev-Test-Distributions"><span class="toc-number">1.1.5.</span> <span class="toc-text">Train&#x2F;Dev&#x2F;Test Distributions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Size-of-the-Dev-and-Test-Sets"><span class="toc-number">1.1.6.</span> <span class="toc-text">Size of the Dev and Test Sets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#When-to-Change-Dev-Test-Sets-and-Metrics-%EF%BC%88%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%94%B9%E5%8F%98%E5%BC%80%E5%8F%91-%E6%B5%8B%E8%AF%95%E9%9B%86%E4%B8%8E%E6%8C%87%E6%A0%87%EF%BC%89"><span class="toc-number">1.1.7.</span> <span class="toc-text">When to Change Dev&#x2F;Test Sets and Metrics?（什么时候改变开发&#x2F;测试集与指标）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-Human-level-Performance"><span class="toc-number">1.1.8.</span> <span class="toc-text">Why Human-level Performance?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Avoidable-Bias"><span class="toc-number">1.1.9.</span> <span class="toc-text">Avoidable Bias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Understanding-Human-level-Performance"><span class="toc-number">1.1.10.</span> <span class="toc-text">Understanding Human-level Performance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Improving-your-Model-Performance%EF%BC%88%E6%94%B9%E5%96%84%E6%A8%A1%E5%9E%8B%E8%A1%A8%E7%8E%B0%EF%BC%89"><span class="toc-number">1.1.11.</span> <span class="toc-text">Improving your Model Performance（改善模型表现）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ML-Strategy-2"><span class="toc-number">1.2.</span> <span class="toc-text">ML Strategy (2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Carrying-Out-Error-Analysis%EF%BC%88%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">Carrying Out Error Analysis（误差分析）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cleaning-up-Incorrectly-labeled-data"><span class="toc-number">1.2.2.</span> <span class="toc-text">Cleaning up Incorrectly labeled data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-and-testing-on-different-distributions"><span class="toc-number">1.2.3.</span> <span class="toc-text">Training and testing on different distributions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bias-and-Variance-with-mismatched-data-distributions"><span class="toc-number">1.2.4.</span> <span class="toc-text">Bias and Variance with mismatched data distributions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Addressing-data-mismatch%EF%BC%88%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8C%B9%E9%85%8D%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">Addressing data mismatch（定位数据不匹配）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transfer-learning%EF%BC%88%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">Transfer learning（迁移学习）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-task-learning%EF%BC%88%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">Multi-task learning（多任务学习）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#End-to-end-deep-learning%EF%BC%88%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%89"><span class="toc-number">1.2.8.</span> <span class="toc-text">End-to-end deep learning（端到端深度学习）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/09/03_Structuring-Machine-Learning-Projects/" title="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202204052243024.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization"/></a><div class="content"><a class="title" href="/2022/04/09/03_Structuring-Machine-Learning-Projects/" title="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization">Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization</a><time datetime="2022-04-09T14:37:21.000Z" title="Created 2022-04-09 22:37:21">2022-04-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/29/02_DL-Improving-Deep-Neural-Networks-Hyperparameter-Tuning-Regularization-and-Optimization/" title="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292221477.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization"/></a><div class="content"><a class="title" href="/2022/03/29/02_DL-Improving-Deep-Neural-Networks-Hyperparameter-Tuning-Regularization-and-Optimization/" title="Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization">Improving_Deep_Neural_Networks_Hyperparameter_Tuning,Regularization_and_Optimization</a><time datetime="2022-03-29T14:17:42.000Z" title="Created 2022-03-29 22:17:42">2022-03-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/29/01_DL-Neural-Networks-and-Deep-Learning/" title="Neural_Networks_and_Deep_Learning"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292222632.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Neural_Networks_and_Deep_Learning"/></a><div class="content"><a class="title" href="/2022/03/29/01_DL-Neural-Networks-and-Deep-Learning/" title="Neural_Networks_and_Deep_Learning">Neural_Networks_and_Deep_Learning</a><time datetime="2022-03-29T14:15:26.000Z" title="Created 2022-03-29 22:15:26">2022-03-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/29/00%20DL-Aim/" title="DL_Aim"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202203292219385.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DL_Aim"/></a><div class="content"><a class="title" href="/2022/03/29/00%20DL-Aim/" title="DL_Aim">DL_Aim</a><time datetime="2022-03-29T14:12:57.000Z" title="Created 2022-03-29 22:12:57">2022-03-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/" title="React（一）"><img src="https://wzn0410.oss-cn-beijing.aliyuncs.com/img/CTF/bg03旧校舎03(秋)b.bmp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="React（一）"/></a><div class="content"><a class="title" href="/2022/02/02/React%EF%BC%88%E4%B8%80%EF%BC%89/" title="React（一）">React（一）</a><time datetime="2022-02-02T13:54:07.000Z" title="Created 2022-02-02 21:54:07">2022-02-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://wzn0410.oss-cn-beijing.aliyuncs.com/img/复习/202204052243024.bmp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By W</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">简</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><div class="aplayer no-destroy" data-id="000PeZCQ1i4XVs" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script async data-pjax src="/js/background.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
